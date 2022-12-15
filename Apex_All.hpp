@@ -1,10 +1,11 @@
                                                       /* Create by #FF69B4 */
 class Miscellaneous
 {
-	int                                                cl_entitylist;                                            // 0x1B0E678(0x00x4)
-	int                                                LocalPlayer;                                              // 0x1EBF488(0x00x4)
-	int                                                NameList;                                                 // 0xBC1C040(0x00x4)
-	int                                                ViewRender;                                               // 0x7641830(0x00x4)
+	int                                                cl_entitylist;                                            // 0x1B0E718(0x00x4)
+	int                                                LocalPlayer;                                              // 0x1EBF528(0x00x4)
+	int                                                LocalEntityHandle;                                        // 0x1352C7C(0x00x4)
+	int                                                NameList;                                                 // 0xBC1C1C0(0x00x4)
+	int                                                ViewRender;                                               // 0x76419B0(0x00x4)
 	int                                                StudioHdr;                                                // 0x10F0(0x00x4)
 };
 
@@ -64,6 +65,29 @@ class C_ClientRagdoll
 	float                                              m_flScaleEnd;                                             // 0x1664(0x0028)
 	float                                              m_flScaleTimeStart;                                       // 0x168C(0x0028)
 	float                                              m_flScaleTimeEnd;                                         // 0x16B4(0x0028)
+};
+
+//class DataMap.CPlayerState
+class CPlayerState
+{
+	bool                                               deadflag;                                                 // 0x006C(0x0001)
+};
+
+//class DataMap.PlayerZiplineData_Client
+class PlayerZiplineData_Client
+{
+	bool                                               m_ziplineReenableWeapons;                                 // 0x0008(0x0001)
+	float                                              m_mountingZiplineAlpha;                                   // 0x000C(0x0004)
+	struct Time                                        m_ziplineStartTime;                                       // 0x0010(0x0004)
+	struct Time                                        m_ziplineEndTime;                                         // 0x0014(0x0004)
+	struct Vector                                      m_mountingZiplineSourcePosition;                          // 0x0018(0x000C)
+	struct Vector                                      m_mountingZiplineSourceVelocity;                          // 0x0024(0x000C)
+	struct Vector                                      m_mountingZiplineTargetPosition;                          // 0x0030(0x000C)
+	struct Vector                                      m_ziplineUsePosition;                                     // 0x0048(0x000C)
+	float                                              m_slidingZiplineAlpha;                                    // 0x0054(0x0004)
+	struct Vector                                      m_lastMoveDir2D;                                          // 0x0058(0x000C)
+	bool                                               m_ziplineReverse;                                         // 0x0064(0x0001)
+	struct Vector                                      m_ziplinePathDirection;                                   // 0x0068(0x000C)
 };
 
 //class DataMap.C_Player
@@ -423,6 +447,13 @@ class C_BaseAnimatingOverlay
 	float                                              m_currentFrameAnimatingOverlay.animOverlayCycle;          // 0x18D8(0x0024)
 };
 
+//class DataMap.WeaponInventory_Client
+class WeaponInventory_Client
+{
+	struct EHANDLE                                     weapons;                                                  // 0x0008(0x0030)
+	struct EHANDLE                                     activeWeapons;                                            // 0x0054(0x000C)
+};
+
 //class DataMap.C_BaseCombatCharacter
 class C_BaseCombatCharacter
 {
@@ -529,6 +560,82 @@ class C_ParticleSystem
 	bool                                               m_killIfOverLimit;                                        // 0x0A77(0x0001)
 };
 
+//class DataMap.C_PlayerLocalData
+class C_PlayerLocalData
+{
+	int                                                m_nStepside;                                              // 0x0008(0x0004)
+	int                                                m_nOldButtons;                                            // 0x000C(0x0004)
+	int                                                m_nOldVehicleButtons;                                     // 0x0010(0x0004)
+	int                                                m_iHideHUD;                                               // 0x0014(0x0004)
+	int                                                m_superJumpsUsed;                                         // 0x0018(0x0004)
+	bool                                               m_jumpedOffRodeo;                                         // 0x001C(0x0001)
+	struct Time                                        m_jumpPressTime;                                          // 0x0020(0x0004)
+	struct Time                                        m_prevJumpPressTime;                                      // 0x0024(0x0004)
+	struct Time                                        m_jetpackActivateTime;                                    // 0x0028(0x0004)
+	struct Time                                        m_jetpackDeactivateTime;                                  // 0x002C(0x0004)
+	float                                              m_flSuitPower;                                            // 0x0030(0x0004)
+	float                                              m_flSuitJumpPower;                                        // 0x0034(0x0004)
+	float                                              m_flSuitGrapplePower;                                     // 0x0038(0x0004)
+	float                                              m_flFallVelocity;                                         // 0x003C(0x0004)
+	float                                              m_flStepSize;                                             // 0x0040(0x0004)
+	float                                              m_airSlowMoFrac;                                          // 0x0044(0x0004)
+	int                                                predictableFlags;                                         // 0x0048(0x0004)
+	int                                                m_bitsActiveDevices;                                      // 0x004C(0x0004)
+	int                                                m_forceStance;                                            // 0x0050(0x0004)
+	bool                                               m_forceSlide;                                             // 0x0054(0x0001)
+	bool                                               m_duckToggleOn;                                           // 0x0055(0x0001)
+	bool                                               m_bDrawViewmodel;                                         // 0x0056(0x0001)
+	bool                                               m_bAllowAutoMovement;                                     // 0x0057(0x0001)
+	struct Vector                                      m_airMoveBlockPlanes;                                     // 0x0184(0x0018)
+	struct Time                                        m_airMoveBlockPlaneTime;                                  // 0x019C(0x0004)
+	int                                                m_airMoveBlockPlaneCount;                                 // 0x01A0(0x0004)
+	struct Time                                        m_queuedMeleePressTime;                                   // 0x01A4(0x0004)
+	struct Time                                        m_queuedGrappleMeleeTime;                                 // 0x01A8(0x0004)
+	bool                                               m_disableMeleeUntilRelease;                               // 0x01AD(0x0001)
+	struct Time                                        m_meleePressTime;                                         // 0x01B0(0x0004)
+	int                                                m_meleeDisabledCounter;                                   // 0x01B4(0x0004)
+	int                                                m_meleeInputIndex;                                        // 0x01B8(0x0004)
+	bool                                               m_oneHandedWeaponUsage;                                   // 0x01C0(0x0001)
+	bool                                               m_prevOneHandedWeaponUsage;                               // 0x01C1(0x0001)
+	bool                                               m_titanEmbarkEnabled;                                     // 0x01F4(0x0001)
+	bool                                               m_titanDisembarkEnabled;                                  // 0x01F5(0x0001)
+	float                                              m_playerAnimStationaryGoalFeetYaw;                        // 0x01FC(0x0004)
+	bool                                               m_playerAnimJumping;                                      // 0x0200(0x0001)
+	struct Time                                        m_playerAnimJumpStartTime;                                // 0x0204(0x0004)
+	bool                                               m_playerAnimFirstJumpFrame;                               // 0x0208(0x0001)
+	bool                                               m_playerAnimDodging;                                      // 0x0209(0x0001)
+	int                                                m_playerAnimJumpActivity;                                 // 0x020A(0x0002)
+	bool                                               m_playerAnimLanding;                                      // 0x020C(0x0001)
+	bool                                               m_playerAnimShouldLand;                                   // 0x020D(0x0001)
+	struct Time                                        m_playerAnimLandStartTime;                                // 0x0210(0x0004)
+	bool                                               m_playerAnimInAirWalk;                                    // 0x0214(0x0001)
+	float                                              m_playerAnimPrevFrameSequenceMotionYaw;                   // 0x0218(0x0004)
+	int                                                m_playerAnimMeleeParity;                                  // 0x021C(0x0004)
+	struct Time                                        m_playerAnimMeleeStartTime;                               // 0x0220(0x0004)
+	struct Quaternion                                  m_playerLocalGravityToWorldTransform;                     // 0x0224(0x0030)
+	struct Quaternion                                  m_playerLocalGravityBlendStartRotation;                   // 0x0254(0x0010)
+	struct Quaternion                                  m_playerLocalGravityBlendEndRotation;                     // 0x0264(0x0010)
+	struct Vector                                      m_playerLocalGravityBlendEndDirection;                    // 0x0274(0x000C)
+	struct Time                                        m_playerLocalGravityBlendStartTime;                       // 0x0280(0x0004)
+	struct Time                                        m_playerLocalGravityBlendEndTime;                         // 0x0284(0x0004)
+	float                                              m_playerLocalGravityBlendStrength;                        // 0x0288(0x0004)
+	float                                              m_playerLocalGravityStrength;                             // 0x028C(0x0004)
+	int                                                m_playerLocalGravityType;                                 // 0x0290(0x0004)
+	struct Vector                                      m_playerLocalGravityPoint;                                // 0x0294(0x000C)
+	struct Vector                                      m_playerLocalGravityLineStart;                            // 0x02A0(0x000C)
+	struct Vector                                      m_playerLocalGravityLineEnd;                              // 0x02AC(0x000C)
+	struct EHANDLE                                     m_playerLocalGravityEntity;                               // 0x02B8(0x0004)
+	struct EHANDLE                                     m_playerLocalGravityLineStartEntity;                      // 0x02BC(0x0004)
+	struct EHANDLE                                     m_playerLocalGravityLineEndEntity;                        // 0x02C0(0x0004)
+	struct Time                                        m_playerFloatLookStartTime;                               // 0x02C4(0x0004)
+	struct Time                                        m_playerFloatLookEndTime;                                 // 0x02C8(0x0004)
+	float                                              m_wallrunLatestFloorHeight;                               // 0x02CC(0x0004)
+	bool                                               m_wallrunFromJetpack;                                     // 0x02D0(0x0001)
+	struct Vector                                      m_groundNormal;                                           // 0x02D4(0x000C)
+	bool                                               m_continuousUseBlocked;                                   // 0x02E0(0x0001)
+	struct EHANDLE                                     m_useEnt;                                                 // 0x02E4(0x0004)
+};
+
 //class DataMap.C_DynamicProp
 class C_DynamicProp
 {
@@ -545,6 +652,13 @@ class C_Team
 	int                                                m_iRoundsWon;                                             // 0x0A70(0x0004)
 	int                                                m_iTeamTeamNum;                                           // 0x0A74(0x0004)
 	char                                               m_szTeamname;                                             // 0x0A98(0x0100)
+};
+
+//class DataMap.C_TriggerCylinderHeavy
+class C_TriggerCylinderHeavy
+{
+	struct Time                                        m_nextLaunchTime;                                         // 0x0ACC(0x0004)
+	struct Time                                        m_teslaTrapObstructedEndTime;                             // 0x0B2C(0x0004)
 };
 
 //class DataMap.C_PlayerVehicle
@@ -595,11 +709,153 @@ class CBaseGrenade
 	struct EHANDLE                                     m_hThrower;                                               // 0x2EB4(0x0004)
 };
 
+//class DataMap.CBaseViewModel
+class CBaseViewModel
+{
+	short                                              m_currentFrame.modelIndex;                                // 0x00A8(0x0002)
+	float                                              m_currentFrame.animCycle;                                 // 0x00C4(0x0004)
+	struct Vector                                      m_angAbsRotation;                                         // 0x0134(0x000C)
+	struct Vector                                      m_vecAbsOrigin;                                           // 0x014C(0x000C)
+	struct Vector                                      m_localOrigin;                                            // 0x0158(0x000C)
+	struct Vector                                      m_localAngles;                                            // 0x0164(0x000C)
+	int                                                m_fEffects;                                               // 0x0448(0x0004)
+	struct Vector                                      m_angNetworkAngles;                                       // 0x0494(0x000C)
+	int                                                m_nBody;                                                  // 0x0E58(0x0004)
+	struct Time                                        m_nResetEventsStartTime;                                  // 0x0E64(0x0004)
+	int                                                m_nResetEventsParity;                                     // 0x0E68(0x0004)
+	bool                                               m_bSequenceFinished;                                      // 0x0EFC(0x0001)
+	float                                              m_currentFrameBaseAnimating.animStartTime;                // 0x0F14(0x0004)
+	float                                              m_currentFrameBaseAnimating.animStartCycle;               // 0x0F18(0x0004)
+	float                                              m_currentFrameBaseAnimating.animPlaybackRate;             // 0x0F1C(0x0004)
+	int                                                m_currentFrameBaseAnimating.animModelIndex;               // 0x0F20(0x0004)
+	int                                                m_currentFrameBaseAnimating.animSequenceParity;           // 0x0F24(0x0004)
+	int                                                m_currentFrameBaseAnimating.animSequence;                 // 0x0F2C(0x0002)
+	bool                                               m_currentFrameAnimatingOverlay.animOverlayIsActive;       // 0x1774(0x0009)
+	float                                              m_currentFrameAnimatingOverlay.animOverlayStartTime;      // 0x1780(0x0024)
+	float                                              m_currentFrameAnimatingOverlay.animOverlayStartCycle;     // 0x17A4(0x0024)
+	float                                              m_currentFrameAnimatingOverlay.animOverlayPlaybackRate;   // 0x17C8(0x0024)
+	int                                                m_currentFrameAnimatingOverlay.animOverlayModelIndex;     // 0x17EC(0x0024)
+	int                                                m_currentFrameAnimatingOverlay.animOverlaySequence;       // 0x1810(0x0012)
+	float                                              m_currentFrameAnimatingOverlay.animOverlayWeight;         // 0x1824(0x0024)
+	float                                              m_currentFrameAnimatingOverlay.animOverlayAnimTime;       // 0x186C(0x0024)
+	float                                              m_currentFrameAnimatingOverlay.animOverlayFadeInDuration; // 0x1890(0x0024)
+	float                                              m_currentFrameAnimatingOverlay.animOverlayFadeOutDuration;// 0x18B4(0x0024)
+	float                                              m_currentFrameAnimatingOverlay.animOverlayCycle;          // 0x18D8(0x0024)
+	struct EHANDLE                                     m_viewModelOwner;                                         // 0x19D4(0x0004)
+	bool                                               m_projectileIsVisible;                                    // 0x19D8(0x0001)
+	bool                                               m_bBlockEventLayer;                                       // 0x1DD0(0x0001)
+	bool                                               m_isAdsTransition;                                        // 0x1DD1(0x0001)
+	struct EHANDLE                                     m_hWeapon;                                                // 0x1DD4(0x0004)
+	char                                               m_tracerAttachments;                                      // 0x1DD8(0x0002)
+	char                                               m_tracerAttachments;                                      // 0x1DD8(0x0002)
+	char                                               m_tracerAttachmentsScoped;                                // 0x1DDA(0x0002)
+	char                                               m_tracerAttachmentsScoped;                                // 0x1DDA(0x0002)
+};
+
+//class DataMap.CCollisionProperty
+class CCollisionProperty
+{
+	struct Vector                                      m_vecMins;                                                // 0x0010(0x000C)
+	struct Vector                                      m_vecMaxs;                                                // 0x001C(0x000C)
+	int                                                m_usSolidFlags;                                           // 0x0028(0x0004)
+	char                                               m_nSolidType;                                             // 0x002C(0x0001)
+	char                                               m_triggerBloat;                                           // 0x002D(0x0001)
+	char                                               m_collisionDetailLevel;                                   // 0x002E(0x0001)
+};
+
+//class DataMap.C_PropDoor
+class C_PropDoor
+{
+	struct Vector                                      m_localOrigin;                                            // 0x0158(0x000C)
+	struct Vector                                      m_localAngles;                                            // 0x0164(0x000C)
+	int                                                m_nNextThinkTick;                                         // 0x0574(0x0004)
+	float                                              m_angle;                                                  // 0x16B4(0x0004)
+	float                                              m_startAngle;                                             // 0x16B8(0x0004)
+	float                                              m_startAngleVel;                                          // 0x16BC(0x0004)
+	struct Time                                        m_startMoveTime;                                          // 0x16C0(0x0004)
+	float                                              m_nextHitSoundTime;                                       // 0x16CC(0x0004)
+	float                                              m_lastThinkTime;                                          // 0x16D0(0x0004)
+	struct EHANDLE                                     m_interactingPlayer;                                      // 0x1718(0x0004)
+	bool                                               m_interactingPlayerWantsOpen;                             // 0x171C(0x0001)
+	struct Time                                        m_useDebounceEndTime;                                     // 0x1720(0x0004)
+	float                                              m_prevAngle;                                              // 0x1728(0x0004)
+};
+
+//class DataMap.C_EnvWindShared
+class C_EnvWindShared
+{
+	float                                              m_flStartTime;                                            // 0x0008(0x0004)
+	int                                                m_iWindSeed;                                              // 0x000C(0x0004)
+	int                                                m_iMinWind;                                               // 0x0010(0x0004)
+	int                                                m_iMaxWind;                                               // 0x0014(0x0004)
+	int                                                m_windRadius;                                             // 0x0018(0x0004)
+	int                                                m_iMinGust;                                               // 0x001C(0x0004)
+	int                                                m_iMaxGust;                                               // 0x0020(0x0004)
+	float                                              m_flMinGustDelay;                                         // 0x0024(0x0004)
+	float                                              m_flMaxGustDelay;                                         // 0x0028(0x0004)
+	float                                              m_flGustDuration;                                         // 0x002C(0x0004)
+	int                                                m_iGustDirChange;                                         // 0x0030(0x0004)
+	struct Vector                                      m_location;                                               // 0x0034(0x000C)
+	int                                                m_iszGustSound;                                           // 0x0040(0x0004)
+	int                                                m_iWindDir;                                               // 0x0044(0x0004)
+	float                                              m_flWindSpeed;                                            // 0x0048(0x0004)
+	struct Vector                                      m_currentWindVector;                                      // 0x004C(0x000C)
+	struct Vector                                      m_CurrentSwayVector;                                      // 0x0058(0x000C)
+	struct Vector                                      m_PrevSwayVector;                                         // 0x0064(0x000C)
+	int                                                m_iInitialWindDir;                                        // 0x0070(0x0004)
+	float                                              m_flInitialWindSpeed;                                     // 0x0074(0x0004)
+	float                                              m_flVariationTime;                                        // 0x0078(0x0004)
+	float                                              m_flSimTime;                                              // 0x007C(0x0004)
+	float                                              m_flSwitchTime;                                           // 0x0080(0x0004)
+	float                                              m_flAveWindSpeed;                                         // 0x0084(0x0004)
+	bool                                               m_bGusting;                                               // 0x0088(0x0001)
+	float                                              m_flWindAngleVariation;                                   // 0x008C(0x0004)
+	float                                              m_flWindSpeedVariation;                                   // 0x0090(0x0004)
+	int                                                m_iEntIndex;                                              // 0x0094(0x0004)
+	void                                               m_Stream;                                                 // 0x0098(0x0038)
+	void                                               m_WindVariationStream;                                    // 0x00D0(0x0038)
+	void                                               m_WindAveQueue;                                           // 0x0108(0x0038)
+	void                                               m_WindVariationQueue;                                     // 0x0140(0x0038)
+};
+
 //class DataMap.C_GlobalNonRewinding
 class C_GlobalNonRewinding
 {
 	struct Embedded                                    m_playerObserver;                                         // 0x0A60(0x0008)
 	struct Embedded                                    m_playerMiscData;                                         // 0x0E60(0x0008)
+};
+
+//class DataMap.C_SequenceTransitionerLayer
+class C_SequenceTransitionerLayer
+{
+	bool                                               m_sequenceTransitionerLayerActive;                        // 0x0018(0x0001)
+	float                                              m_sequenceTransitionerLayerStartCycle;                    // 0x001C(0x0004)
+	int                                                m_sequenceTransitionerLayerSequence;                      // 0x0020(0x0002)
+	float                                              m_weight;                                                 // 0x0024(0x0004)
+	float                                              m_sequenceTransitionerLayerPlaybackRate;                  // 0x0028(0x0004)
+	struct Time                                        m_sequenceTransitionerLayerStartTime;                     // 0x002C(0x0004)
+	float                                              m_sequenceTransitionerLayerFadeOutDuration;               // 0x0030(0x0004)
+};
+
+//class DataMap.C_SequenceTransitioner
+class C_SequenceTransitioner
+{
+	struct Embedded                                    m_sequenceTransitionerLayers;                             // 0x0050(0x0000)
+	int                                                m_sequenceTransitionerLayerCount;                         // 0x01A0(0x0004)
+};
+
+//class DataMap.C_KnockBack
+class C_KnockBack
+{
+	struct Vector                                      velocity;                                                 // 0x0008(0x000C)
+	struct Time                                        beginTime;                                                // 0x0014(0x0004)
+	struct Time                                        endTime;                                                  // 0x0018(0x0004)
+};
+
+//class DataMap.CPlayerShared
+class CPlayerShared
+{
+	int                                                m_nPlayerCond;                                            // 0x0008(0x0004)
 };
 
 //class DataMap.CPredictedFirstPersonProxy
@@ -627,6 +883,17 @@ class C_WallrunCurve
 {
 	int                                                width;                                                    // 0x0A70(0x0004)
 	int                                                height;                                                   // 0x0A74(0x0004)
+};
+
+//class DataMap.CGrappleHook
+class CGrappleHook
+{
+	struct EHANDLE                                     m_pMoveParent;                                            // 0x0118(0x0004)
+	struct Vector                                      m_localOrigin;                                            // 0x0158(0x000C)
+	struct Vector                                      m_localAngles;                                            // 0x0164(0x000C)
+	int                                                m_visibilityFlags;                                        // 0x0444(0x0004)
+	char                                               m_parentAttachment;                                       // 0x0854(0x0001)
+	struct EHANDLE                                     m_grappleZipline;                                         // 0x1640(0x0004)
 };
 
 //class DataMap.CTurret
@@ -818,6 +1085,36 @@ class CWeaponX
 	bool                                               m_bRemoveable;                                            // 0x2E4C(0x0001)
 };
 
+//class DataMap.C_ZiplinePhysicsNode
+class C_ZiplinePhysicsNode
+{
+	struct Vector                                      position;                                                 // 0x0008(0x000C)
+	struct Vector                                      prevPosition;                                             // 0x0014(0x000C)
+};
+
+//class DataMap.C_ZiplinePhysicsAttachedEntity
+class C_ZiplinePhysicsAttachedEntity
+{
+	struct EHANDLE                                     entity;                                                   // 0x0008(0x0004)
+	struct Vector                                      attachAcceleration;                                       // 0x000C(0x000C)
+	float                                              attachTime;                                               // 0x0018(0x0004)
+};
+
+//class DataMap.C_ZiplinePhysics
+class C_ZiplinePhysics
+{
+	int                                                m_ziplineType;                                            // 0x000C(0x0004)
+	struct Vector                                      m_ziplineStart;                                           // 0x0010(0x000C)
+	struct Vector                                      m_ziplineEnd;                                             // 0x001C(0x000C)
+	struct Embedded                                    m_nodes;                                                  // 0x0028(0x0000)
+	int                                                m_numNodes;                                               // 0x0228(0x0004)
+	int                                                m_springDistance;                                         // 0x022C(0x0004)
+	float                                              m_remainingUnsimulatedTime;                               // 0x0234(0x0004)
+	struct Embedded                                    m_attachedEntities;                                       // 0x0240(0x0000)
+	int                                                m_numAttachedEntities;                                    // 0x0340(0x0004)
+	struct EHANDLE                                     m_ziplineOwner;                                           // 0x0344(0x0004)
+};
+
 //class DataMap.C_Zipline
 class C_Zipline
 {
@@ -827,6 +1124,56 @@ class C_Zipline
 	struct Vector                                      m_currentFrameZipline.ziplinePreviousPositions;           // 0x0B4C(0x00C0)
 	float                                              m_currentFrameZipline.ziplineDistances;                   // 0x0C0C(0x003C)
 	struct Embedded                                    m_ziplinePhysics;                                         // 0x0C58(0x0000)
+};
+
+//class DataMap.C_BaseEntity
+class C_BaseEntity
+{
+	int                                                m_iEFlags;                                                // 0x0058(0x0004)
+	int                                                m_fFlags;                                                 // 0x0098(0x0004)
+	short                                              m_currentFrame.modelIndex;                                // 0x00A8(0x0002)
+	struct Vector                                      m_currentFrame.viewOffset;                                // 0x00B8(0x000C)
+	struct Vector                                      m_vecAngVelocity;                                         // 0x0128(0x000C)
+	struct Vector                                      m_angAbsRotation;                                         // 0x0134(0x000C)
+	struct Vector                                      m_vecAbsVelocity;                                         // 0x0140(0x000C)
+	struct Vector                                      m_vecAbsOrigin;                                           // 0x014C(0x000C)
+	struct Vector                                      m_localOrigin;                                            // 0x0158(0x000C)
+	struct Vector                                      m_localAngles;                                            // 0x0164(0x000C)
+	float                                              m_flGravity;                                              // 0x0424(0x0004)
+	float                                              m_flProxyRandomValue;                                     // 0x0428(0x0004)
+	struct EHANDLE                                     m_hGroundEntity;                                          // 0x0438(0x0004)
+	float                                              m_flMaxspeed;                                             // 0x0440(0x0004)
+	int                                                m_visibilityFlags;                                        // 0x0444(0x0004)
+	int                                                m_fEffects;                                               // 0x0448(0x0004)
+	int                                                m_iTeamNum;                                               // 0x044C(0x0004)
+	int                                                m_passThroughFlags;                                       // 0x0468(0x0004)
+	int                                                m_passThroughThickness;                                   // 0x046C(0x0004)
+	float                                              m_passThroughDirection;                                   // 0x0470(0x0004)
+	struct Vector                                      m_deathVelocity;                                          // 0x0474(0x000C)
+	bool                                               m_bIsSoundCodeControllerValueSet;                         // 0x0480(0x0001)
+	float                                              m_flSoundCodeControllerValue;                             // 0x0484(0x0004)
+	struct Vector                                      m_vecVelocity;                                            // 0x0488(0x000C)
+	struct Vector                                      m_angNetworkAngles;                                       // 0x0494(0x000C)
+	float                                              m_flFriction;                                             // 0x04A0(0x0004)
+	struct EHANDLE                                     m_hOwnerEntity;                                           // 0x04A8(0x0004)
+	bool                                               m_bRenderWithViewModels;                                  // 0x04AC(0x0001)
+	char                                               m_nRenderFX;                                              // 0x04AD(0x0001)
+	char                                               m_nRenderMode;                                            // 0x04B9(0x0001)
+	char                                               m_MoveType;                                               // 0x04BA(0x0001)
+	char                                               m_MoveCollide;                                            // 0x04BB(0x0001)
+	struct Embedded                                    m_Collision;                                              // 0x04C0(0x0000)
+};
+
+//class DataMap.C_BaseEntity
+class C_BaseEntity
+{
+	string                                             m_ModelName;                                              // 0x0030(0x0008)
+	int                                                m_fFlags;                                                 // 0x0098(0x0004)
+	struct Vector                                      m_angAbsRotation;                                         // 0x0134(0x000C)
+	struct PositionVector                              m_vecAbsOrigin;                                           // 0x014C(0x000C)
+	struct PositionVector                              m_vecPrevAbsOrigin;                                       // 0x0418(0x000C)
+	float                                              m_flGravity;                                              // 0x0424(0x0004)
+	float                                              m_rgflCoordinateFrame;                                    // 0x08D0(0x0030)
 };
 
 //class RecvTable.DT_CollisionProperty
@@ -852,22 +1199,22 @@ class DT_PredictableId
 //class RecvTable.DT_HighlightSettings
 class DT_HighlightSettings
 {
-	struct DataTable                                   m_highlightParams;                                        // 0x01B8(0x0000)
-	struct DataTable                                   m_highlightFunctionBits;                                  // 0x02C0(0x0000)
-	struct DataTable                                   m_highlightTeamBits;                                      // 0x0318(0x0000)
-	struct DataTable                                   m_highlightServerFadeBases;                               // 0x0370(0x0000)
-	struct DataTable                                   m_highlightServerFadeStartTimes;                          // 0x0378(0x0000)
-	struct DataTable                                   m_highlightServerFadeEndTimes;                            // 0x0380(0x0000)
+	struct m_highlightParams                           m_highlightParams;                                        // 0x01B8(0x0000)
+	struct m_highlightFunctionBits                     m_highlightFunctionBits;                                  // 0x02C0(0x0000)
+	struct m_highlightTeamBits                         m_highlightTeamBits;                                      // 0x0318(0x0000)
+	struct m_highlightServerFadeBases                  m_highlightServerFadeBases;                               // 0x0370(0x0000)
+	struct m_highlightServerFadeStartTimes             m_highlightServerFadeStartTimes;                          // 0x0378(0x0000)
+	struct m_highlightServerFadeEndTimes               m_highlightServerFadeEndTimes;                            // 0x0380(0x0000)
 	int                                                m_highlightServerContextID;                               // 0x03C0(0x0004)
 };
 
 //class RecvTable.DT_BaseEntity
 class DT_BaseEntity
 {
-	struct DataTable                                   HighlightSettings;                                        // 0x0000(0x0000)
+	struct DT_HighlightSettings                        HighlightSettings;                                        // 0x0000(0x0000)
 	int                                                movetype;                                                 // 0x0000(0xFFFFFFFF)
 	int                                                movecollide;                                              // 0x0000(0xFFFFFFFF)
-	struct DataTable                                   predictable_id;                                           // 0x0000(0x0000)
+	struct DT_PredictableId                            predictable_id;                                           // 0x0000(0x0000)
 	int                                                moveparent;                                               // 0x001C(0x0004)
 	int                                                m_parentAttachment;                                       // 0x0020(0x0001)
 	int                                                m_fEffects;                                               // 0x0040(0x0004)
@@ -900,7 +1247,7 @@ class DT_BaseEntity
 	int                                                m_bRenderWithViewModels;                                  // 0x04AC(0x0001)
 	int                                                m_nRenderFX;                                              // 0x04AD(0x0001)
 	int                                                m_nRenderMode;                                            // 0x04B9(0x0001)
-	struct DataTable                                   m_Collision;                                              // 0x04C0(0x0000)
+	struct DT_CollisionProperty                        m_Collision;                                              // 0x04C0(0x0000)
 	int                                                m_CollisionGroup;                                         // 0x0540(0x0004)
 	int                                                m_contents;                                               // 0x0544(0x0004)
 	int                                                m_collideWithOwner;                                       // 0x0548(0x0001)
@@ -924,7 +1271,7 @@ class DT_BaseEntity
 	float                                              m_usableDistanceOverride;                                 // 0x0928(0x0004)
 	float                                              m_usableFOV;                                              // 0x092C(0x0004)
 	float                                              m_usePromptSize;                                          // 0x0930(0x0004)
-	struct DataTable                                   m_spottedByTeams;                                         // 0x0948(0x0000)
+	struct m_spottedByTeams                            m_spottedByTeams;                                         // 0x0948(0x0000)
 	int                                                m_firstChildEntityLink;                                   // 0x0A40(0x0004)
 	int                                                m_firstParentEntityLink;                                  // 0x0A44(0x0004)
 	struct BitMask                                     m_realmsBitMask;                                          // 0x0A48(0x0008)
@@ -933,13 +1280,13 @@ class DT_BaseEntity
 //class RecvTable.DT_SkyCamera
 class DT_SkyCamera
 {
-	struct DataTable                                   DT_SkyCamera;                                             // 0x0000(0x0000)
+	struct DT_BaseEntity                               DT_SkyCamera;                                             // 0x0000(0x0000)
 };
 
 //class RecvTable.DT_ZiplinePhysicsExlusive
 class DT_ZiplinePhysicsExlusive
 {
-	struct DataTable                                   m_nodes;                                                  // 0x0028(0x0000)
+	struct m_nodes                                     m_nodes;                                                  // 0x0028(0x0000)
 	int                                                m_numNodes;                                               // 0x0228(0x0004)
 	float                                              m_remainingUnsimulatedTime;                               // 0x0234(0x0004)
 };
@@ -947,7 +1294,7 @@ class DT_ZiplinePhysicsExlusive
 //class RecvTable.DT_ZiplinePhysics
 class DT_ZiplinePhysics
 {
-	struct DataTable                                   ziplinephysicsexclusive;                                  // 0x0000(0x0000)
+	struct DT_ZiplinePhysicsExlusive                   ziplinephysicsexclusive;                                  // 0x0000(0x0000)
 	int                                                m_isInit;                                                 // 0x0008(0x0001)
 	int                                                m_ziplineType;                                            // 0x000C(0x0004)
 	struct Vector                                      m_ziplineStart;                                           // 0x0010(0x000C)
@@ -955,7 +1302,7 @@ class DT_ZiplinePhysics
 	float                                              m_springDistance;                                         // 0x022C(0x0004)
 	float                                              m_springDistanceScale;                                    // 0x0230(0x0004)
 	int                                                m_outerZiplineEntity;                                     // 0x0238(0x0004)
-	struct DataTable                                   m_attachedEntities;                                       // 0x0240(0x0000)
+	struct m_attachedEntities                          m_attachedEntities;                                       // 0x0240(0x0000)
 	int                                                m_numAttachedEntities;                                    // 0x0340(0x0004)
 	int                                                m_ziplineOwner;                                           // 0x0344(0x0004)
 };
@@ -963,9 +1310,9 @@ class DT_ZiplinePhysics
 //class RecvTable.DT_Zipline
 class DT_Zipline
 {
-	struct DataTable                                   DT_Zipline;                                               // 0x0000(0x0000)
+	struct DT_BaseEntity                               DT_Zipline;                                               // 0x0000(0x0000)
 	int                                                m_numZiplinePoints;                                       // 0x0008(0x0004)
-	struct DataTable                                   m_ziplinePositions;                                       // 0x000C(0x0000)
+	struct m_ziplinePositions                          m_ziplinePositions;                                       // 0x000C(0x0000)
 	int                                                m_detachEndOnUse;                                         // 0x0A60(0x0001)
 	int                                                m_dropToBottom;                                           // 0x0A61(0x0001)
 	float                                              m_ziplineAutoDetachDistance;                              // 0x0A64(0x0004)
@@ -979,21 +1326,21 @@ class DT_Zipline
 	int                                                m_ziplineFollowsPath;                                     // 0x0A7C(0x0001)
 	int                                                m_prevZipline;                                            // 0x0C50(0x0004)
 	int                                                m_nextZipline;                                            // 0x0C54(0x0004)
-	struct DataTable                                   m_ziplinePhysics;                                         // 0x0C58(0x0000)
+	struct DT_ZiplinePhysics                           m_ziplinePhysics;                                         // 0x0C58(0x0000)
 	int                                                m_ziplineMaterialIndex;                                   // 0x0FA0(0x0004)
-	struct DataTable                                   m_ziplineRestPositions;                                   // 0x0FA4(0x0000)
+	struct m_ziplineRestPositions                      m_ziplineRestPositions;                                   // 0x0FA4(0x0000)
 	int                                                m_numZiplineRestPositions;                                // 0x1064(0x0004)
 };
 
 //class RecvTable.DT_Ziprail
 class DT_Ziprail
 {
-	struct DataTable                                   DT_Ziprail;                                               // 0x0000(0x0000)
+	struct DT_Zipline                                  DT_Ziprail;                                               // 0x0000(0x0000)
 	int                                                m_numZiprailPathNodes;                                    // 0x1070(0x0001)
-	struct DataTable                                   m_numSmoothPointsForPathNodes;                            // 0x1074(0x0000)
-	struct DataTable                                   m_tangentTypesForPathNodes;                               // 0x10F4(0x0000)
-	struct DataTable                                   m_positionsForPathNodes;                                  // 0x1174(0x0000)
-	struct DataTable                                   m_smoothDistanceToNode;                                   // 0x12F4(0x0000)
+	struct m_numSmoothPointsForPathNodes               m_numSmoothPointsForPathNodes;                            // 0x1074(0x0000)
+	struct m_tangentTypesForPathNodes                  m_tangentTypesForPathNodes;                               // 0x10F4(0x0000)
+	struct m_positionsForPathNodes                     m_positionsForPathNodes;                                  // 0x1174(0x0000)
+	struct m_smoothDistanceToNode                      m_smoothDistanceToNode;                                   // 0x12F4(0x0000)
 	float                                              m_ziprailPathLen;                                         // 0x1374(0x0004)
 	struct Vector                                      m_pathExtentsMins;                                        // 0x1378(0x000C)
 	struct Vector                                      m_pathExtentsMaxs;                                        // 0x1384(0x000C)
@@ -1003,7 +1350,7 @@ class DT_Ziprail
 //class RecvTable.DT_ZiplineEnd
 class DT_ZiplineEnd
 {
-	struct DataTable                                   DT_ZiplineEnd;                                            // 0x0000(0x0000)
+	struct DT_BaseEntity                               DT_ZiplineEnd;                                            // 0x0000(0x0000)
 	float                                              m_autoDetachDistance;                                     // 0x0A60(0x0004)
 	int                                                m_verticalPushOffInDirectionX;                            // 0x0A64(0x0001)
 	int                                                m_prevZipline;                                            // 0x0A68(0x0004)
@@ -1022,7 +1369,7 @@ class DT_ServerAnimationData
 //class RecvTable.DT_SequenceTransitioner
 class DT_SequenceTransitioner
 {
-	struct DataTable                                   m_sequenceTransitionerLayers;                             // 0x0050(0x0000)
+	struct m_sequenceTransitionerLayers                m_sequenceTransitionerLayers;                             // 0x0050(0x0000)
 	int                                                m_sequenceTransitionerLayerCount;                         // 0x01A0(0x0004)
 };
 
@@ -1047,8 +1394,8 @@ class DT_AnimRelativeData
 //class RecvTable.DT_PredictedAnimEventData
 class DT_PredictedAnimEventData
 {
-	struct DataTable                                   m_predictedAnimEventTimes;                                // 0x0008(0x0000)
-	struct DataTable                                   m_predictedAnimEventIndices;                              // 0x0028(0x0000)
+	struct m_predictedAnimEventTimes                   m_predictedAnimEventTimes;                                // 0x0008(0x0000)
+	struct m_predictedAnimEventIndices                 m_predictedAnimEventIndices;                              // 0x0028(0x0000)
 	int                                                m_predictedAnimEventCount;                                // 0x0048(0x0004)
 	int                                                m_predictedAnimEventTarget;                               // 0x004C(0x0004)
 	int                                                m_predictedAnimEventSequence;                             // 0x0050(0x0002)
@@ -1059,15 +1406,15 @@ class DT_PredictedAnimEventData
 //class RecvTable.DT_BaseAnimating
 class DT_BaseAnimating
 {
-	struct DataTable                                   DT_BaseAnimating;                                         // 0x0000(0x0000)
-	struct DataTable                                   serveranimdata;                                           // 0x0000(0x0000)
+	struct DT_BaseEntity                               DT_BaseAnimating;                                         // 0x0000(0x0000)
+	struct DT_ServerAnimationData                      serveranimdata;                                           // 0x0000(0x0000)
 	float                                              m_animPlaybackRate;                                       // 0x0010(0x0004)
 	int                                                m_animModelIndex;                                         // 0x0014(0x0004)
 	int                                                m_nNewSequenceParity;                                     // 0x0018(0x0004)
 	int                                                m_animFrozen;                                             // 0x0022(0x0001)
 	int                                                m_bClientSideRagdoll;                                     // 0x0023(0x0001)
 	struct Vector                                      m_vecForce;                                               // 0x0024(0x000C)
-	struct DataTable                                   m_flPoseParameter;                                        // 0x0030(0x0000)
+	struct m_flPoseParameter                           m_flPoseParameter;                                        // 0x0030(0x0000)
 	float                                              m_flEstIkOffset;                                          // 0x0090(0x0004)
 	int                                                m_passDamageToParent;                                     // 0x07C4(0x0001)
 	int                                                m_animNetworkFlags;                                       // 0x0A88(0x0004)
@@ -1075,15 +1422,15 @@ class DT_BaseAnimating
 	int                                                m_animCollisionEnabled;                                   // 0x0A8F(0x0001)
 	int                                                m_animRelativeToGroundEnabled;                            // 0x0A90(0x0001)
 	int                                                m_animPlantingEnabled;                                    // 0x0A91(0x0001)
-	struct DataTable                                   m_animRelativeData;                                       // 0x0A94(0x0000)
+	struct DT_AnimRelativeData                         m_animRelativeData;                                       // 0x0A94(0x0000)
 	int                                                m_syncingWithEntity;                                      // 0x0B84(0x0004)
-	struct DataTable                                   m_predictedAnimEventData;                                 // 0x0B88(0x0000)
+	struct DT_PredictedAnimEventData                   m_predictedAnimEventData;                                 // 0x0B88(0x0000)
 	int                                                m_nRagdollImpactFXTableId;                                // 0x0BF4(0x0004)
 	float                                              m_flSkyScaleStartValue;                                   // 0x0BF8(0x0004)
 	float                                              m_flSkyScaleEndValue;                                     // 0x0BFC(0x0004)
 	struct Time                                        m_flSkyScaleStartTime;                                    // 0x0C00(0x0004)
 	struct Time                                        m_flSkyScaleEndTime;                                      // 0x0C04(0x0004)
-	struct DataTable                                   m_SequenceTransitioner;                                   // 0x0C20(0x0000)
+	struct DT_SequenceTransitioner                     m_SequenceTransitioner;                                   // 0x0C20(0x0000)
 	int                                                m_nSkin;                                                  // 0x0E50(0x0004)
 	int                                                m_skinMod;                                                // 0x0E54(0x0002)
 	int                                                m_nBody;                                                  // 0x0E58(0x0004)
@@ -1140,7 +1487,7 @@ class DT_WeaponPlayerData
 	int                                                m_segmentedAnimStartedOneHanded;                          // 0x0048(0x0001)
 	int                                                m_segmentedReloadCanRestartLoop;                          // 0x0049(0x0001)
 	int                                                m_segmentedReloadLoopFireLocked;                          // 0x004A(0x0001)
-	struct DataTable                                   m_realtimeModCmds;                                        // 0x004B(0x0000)
+	struct m_realtimeModCmds                           m_realtimeModCmds;                                        // 0x004B(0x0000)
 	int                                                m_realtimeModCmdHead;                                     // 0x0053(0x0001)
 	int                                                m_realtimeModCmdCount;                                    // 0x0054(0x0001)
 	int                                                m_realtimeModCanADS;                                      // 0x0055(0x0001)
@@ -1206,9 +1553,9 @@ class DT_WeaponX_PredictingClientOnly
 //class RecvTable.DT_WeaponX
 class DT_WeaponX
 {
-	struct DataTable                                   DT_WeaponX;                                               // 0x0000(0x0000)
-	struct DataTable                                   LocalWeaponData;                                          // 0x0000(0x0000)
-	struct DataTable                                   predictingClientOnly;                                     // 0x0000(0x0000)
+	struct DT_BaseAnimating                            DT_WeaponX;                                               // 0x0000(0x0000)
+	struct DT_WeaponX_LocalWeaponData                  LocalWeaponData;                                          // 0x0000(0x0000)
+	struct DT_WeaponX_PredictingClientOnly             predictingClientOnly;                                     // 0x0000(0x0000)
 	int                                                m_networkedFlags;                                         // 0x03F0(0x0004)
 	int                                                m_bClientSideAnimation;                                   // 0x100E(0x0001)
 	int                                                m_weaponOwner;                                            // 0x1640(0x0004)
@@ -1236,7 +1583,7 @@ class DT_WeaponX
 	int                                                m_customActivityOwner;                                    // 0x16AC(0x0004)
 	struct Time                                        m_customActivityEndTime;                                  // 0x16B0(0x0004)
 	int                                                m_customActivityFlags;                                    // 0x16B4(0x0001)
-	struct DataTable                                   m_playerData;                                             // 0x16B8(0x0000)
+	struct DT_WeaponPlayerData                         m_playerData;                                             // 0x16B8(0x0000)
 	int                                                m_lastTossedGrenade;                                      // 0x17A8(0x0004)
 	int                                                m_targetingLaserEnabledScript;                            // 0x17AC(0x0001)
 	int                                                m_needsReloadCheck;                                       // 0x17AD(0x0001)
@@ -1260,7 +1607,7 @@ class DT_WeaponX
 	int                                                m_scriptActivated;                                        // 0x180D(0x0001)
 	int                                                m_curKillCount;                                           // 0x180E(0x0001)
 	int                                                m_curKnockdownCount;                                      // 0x180F(0x0001)
-	struct DataTable                                   m_attachmentIndices;                                      // 0x1810(0x0000)
+	struct m_attachmentIndices                         m_attachmentIndices;                                      // 0x1810(0x0000)
 	int                                                m_lockedSet;                                              // 0x1814(0x0004)
 	int                                                m_isLoadoutPickup;                                        // 0x1818(0x0001)
 	int                                                m_utilityEnt;                                             // 0x181C(0x0004)
@@ -1272,7 +1619,7 @@ class DT_WeaponX
 //class RecvTable.DT_TEProjectileTrail
 class DT_TEProjectileTrail
 {
-	struct DataTable                                   DT_TEProjectileTrail;                                     // 0x0000(0x0000)
+	struct DT_BaseTempEntity                           DT_TEProjectileTrail;                                     // 0x0000(0x0000)
 	int                                                m_owner;                                                  // 0x0028(0x0004)
 	struct Vector                                      m_startPos;                                               // 0x002C(0x000C)
 	struct Vector                                      m_endPos;                                                 // 0x0038(0x000C)
@@ -1311,16 +1658,16 @@ class DT_Projectile
 	struct Time                                        m_projectileCreationTimeServer;                           // 0x1664(0x0004)
 	int                                                m_weaponSource;                                           // 0x1668(0x0004)
 	int                                                m_passThroughModCount;                                    // 0x166C(0x0004)
-	struct DataTable                                   m_passThroughPoints;                                      // 0x1670(0x0000)
-	struct DataTable                                   m_preModdedTrailEffectIndices1p;                          // 0x167C(0x0000)
-	struct DataTable                                   m_preModdedTrailEffectIndices3p;                          // 0x1680(0x0000)
+	struct m_passThroughPoints                         m_passThroughPoints;                                      // 0x1670(0x0000)
+	struct m_preModdedTrailEffectIndices1p             m_preModdedTrailEffectIndices1p;                          // 0x167C(0x0000)
+	struct m_preModdedTrailEffectIndices3p             m_preModdedTrailEffectIndices3p;                          // 0x1680(0x0000)
 	struct Vector                                      m_launchOrigin;                                           // 0x1684(0x000C)
 };
 
 //class RecvTable.DT_Missile
 class DT_Missile
 {
-	struct DataTable                                   DT_Missile;                                               // 0x0000(0x0000)
+	struct DT_Projectile                               DT_Missile;                                               // 0x0000(0x0000)
 	int                                                m_hSpecificTarget;                                        // 0x2E64(0x0004)
 	struct Vector                                      m_targetPosition;                                         // 0x2E74(0x000C)
 	int                                                m_useTargetPosition;                                      // 0x2E80(0x0001)
@@ -1329,13 +1676,13 @@ class DT_Missile
 //class RecvTable.DT_CrossbowBolt
 class DT_CrossbowBolt
 {
-	struct DataTable                                   DT_CrossbowBolt;                                          // 0x0000(0x0000)
+	struct DT_Projectile                               DT_CrossbowBolt;                                          // 0x0000(0x0000)
 };
 
 //class RecvTable.DT_VortexSphere
 class DT_VortexSphere
 {
-	struct DataTable                                   DT_VortexSphere;                                          // 0x0000(0x0000)
+	struct DT_BaseEntity                               DT_VortexSphere;                                          // 0x0000(0x0000)
 	int                                                m_spawnflags;                                             // 0x0094(0x0004)
 	int                                                m_iHealth;                                                // 0x043C(0x0004)
 	int                                                m_iMaxHealth;                                             // 0x0578(0x0004)
@@ -1354,35 +1701,35 @@ class DT_VortexSphere
 //class RecvTable.DT_OverlayVars
 class DT_OverlayVars
 {
-	struct DataTable                                   m_AnimOverlay;                                            // 0x1648(0x0000)
+	struct m_AnimOverlay                               m_AnimOverlay;                                            // 0x1648(0x0000)
 	int                                                m_AnimOverlayCount;                                       // 0x1720(0x0004)
 };
 
 //class RecvTable.DT_BaseAnimatingOverlay
 class DT_BaseAnimatingOverlay
 {
-	struct DataTable                                   DT_BaseAnimatingOverlay;                                  // 0x0000(0x0000)
-	struct DataTable                                   overlay_vars;                                             // 0x0000(0x0000)
-	struct DataTable                                   m_animOverlayIsActive;                                    // 0x0008(0x0000)
-	struct DataTable                                   m_animOverlayStartTime;                                   // 0x0014(0x0000)
-	struct DataTable                                   m_animOverlayStartCycle;                                  // 0x0038(0x0000)
-	struct DataTable                                   m_animOverlayPlaybackRate;                                // 0x005C(0x0000)
-	struct DataTable                                   m_animOverlayModelIndex;                                  // 0x0080(0x0000)
-	struct DataTable                                   m_animOverlaySequence;                                    // 0x00A4(0x0000)
-	struct DataTable                                   m_animOverlayWeight;                                      // 0x00B8(0x0000)
-	struct DataTable                                   m_animOverlayOrder;                                       // 0x00DC(0x0000)
-	struct DataTable                                   m_animOverlayAnimTime;                                    // 0x0100(0x0000)
-	struct DataTable                                   m_animOverlayFadeInDuration;                              // 0x0124(0x0000)
-	struct DataTable                                   m_animOverlayFadeOutDuration;                             // 0x0148(0x0000)
+	struct DT_BaseAnimating                            DT_BaseAnimatingOverlay;                                  // 0x0000(0x0000)
+	struct DT_OverlayVars                              overlay_vars;                                             // 0x0000(0x0000)
+	struct m_animOverlayIsActive                       m_animOverlayIsActive;                                    // 0x0008(0x0000)
+	struct m_animOverlayStartTime                      m_animOverlayStartTime;                                   // 0x0014(0x0000)
+	struct m_animOverlayStartCycle                     m_animOverlayStartCycle;                                  // 0x0038(0x0000)
+	struct m_animOverlayPlaybackRate                   m_animOverlayPlaybackRate;                                // 0x005C(0x0000)
+	struct m_animOverlayModelIndex                     m_animOverlayModelIndex;                                  // 0x0080(0x0000)
+	struct m_animOverlaySequence                       m_animOverlaySequence;                                    // 0x00A4(0x0000)
+	struct m_animOverlayWeight                         m_animOverlayWeight;                                      // 0x00B8(0x0000)
+	struct m_animOverlayOrder                          m_animOverlayOrder;                                       // 0x00DC(0x0000)
+	struct m_animOverlayAnimTime                       m_animOverlayAnimTime;                                    // 0x0100(0x0000)
+	struct m_animOverlayFadeInDuration                 m_animOverlayFadeInDuration;                              // 0x0124(0x0000)
+	struct m_animOverlayFadeOutDuration                m_animOverlayFadeOutDuration;                             // 0x0148(0x0000)
 };
 
 //class RecvTable.DT_Turret
 class DT_Turret
 {
-	struct DataTable                                   DT_Turret;                                                // 0x0000(0x0000)
+	struct DT_BaseAnimatingOverlay                     DT_Turret;                                                // 0x0000(0x0000)
 	int                                                m_iHealth;                                                // 0x043C(0x0004)
 	int                                                m_iMaxHealth;                                             // 0x0578(0x0004)
-	struct DataTable                                   m_overlayEventParity;                                     // 0x1751(0x0000)
+	struct m_overlayEventParity                        m_overlayEventParity;                                     // 0x1751(0x0000)
 	int                                                m_settingsIndex;                                          // 0x1988(0x0004)
 	int                                                m_driver;                                                 // 0x199C(0x0004)
 	float                                              m_forceAimPitch;                                          // 0x19C4(0x0004)
@@ -1396,7 +1743,7 @@ class DT_Turret
 //class RecvTable.DT_ScriptTraceVolume
 class DT_ScriptTraceVolume
 {
-	struct DataTable                                   DT_ScriptTraceVolume;                                     // 0x0000(0x0000)
+	struct DT_BaseEntity                               DT_ScriptTraceVolume;                                     // 0x0000(0x0000)
 	int                                                m_shapeType;                                              // 0x0A60(0x0004)
 	float                                              m_sphereRadius;                                           // 0x0A64(0x0004)
 	struct Vector                                      m_boxMins;                                                // 0x0A68(0x000C)
@@ -1424,26 +1771,26 @@ class DT_GrappleHook
 //class RecvTable.DT_FirstPersonProxy
 class DT_FirstPersonProxy
 {
-	struct DataTable                                   DT_FirstPersonProxy;                                      // 0x0000(0x0000)
+	struct DT_BaseAnimating                            DT_FirstPersonProxy;                                      // 0x0000(0x0000)
 	int                                                m_viewModelOwner;                                         // 0x1670(0x0004)
 };
 
 //class RecvTable.DT_PredictedFirstPersonProxy
 class DT_PredictedFirstPersonProxy
 {
-	struct DataTable                                   DT_PredictedFirstPersonProxy;                             // 0x0000(0x0000)
+	struct DT_FirstPersonProxy                         DT_PredictedFirstPersonProxy;                             // 0x0000(0x0000)
 };
 
 //class RecvTable.DT_BreakableProp
 class DT_BreakableProp
 {
-	struct DataTable                                   DT_BreakableProp;                                         // 0x0000(0x0000)
+	struct DT_BaseAnimating                            DT_BreakableProp;                                         // 0x0000(0x0000)
 };
 
 //class RecvTable.DT_DynamicProp
 class DT_DynamicProp
 {
-	struct DataTable                                   DT_DynamicProp;                                           // 0x0000(0x0000)
+	struct DT_BreakableProp                            DT_DynamicProp;                                           // 0x0000(0x0000)
 	int                                                m_iTeamNum;                                               // 0x044C(0x0004)
 	int                                                m_lifeState;                                              // 0x0798(0x0001)
 	int                                                m_bUseHitboxesForRenderBox;                               // 0x1641(0x0001)
@@ -1453,13 +1800,13 @@ class DT_DynamicProp
 //class RecvTable.DT_Titan_Cockpit
 class DT_Titan_Cockpit
 {
-	struct DataTable                                   DT_Titan_Cockpit;                                         // 0x0000(0x0000)
+	struct DT_DynamicProp                              DT_Titan_Cockpit;                                         // 0x0000(0x0000)
 };
 
 //class RecvTable.DT_PortalPointPush
 class DT_PortalPointPush
 {
-	struct DataTable                                   DT_PortalPointPush;                                       // 0x0000(0x0000)
+	struct DT_BaseEntity                               DT_PortalPointPush;                                       // 0x0000(0x0000)
 	int                                                m_bEnabled;                                               // 0x0A60(0x0001)
 	float                                              m_flMagnitude;                                            // 0x0A64(0x0004)
 	float                                              m_flRadius;                                               // 0x0A68(0x0004)
@@ -1480,8 +1827,8 @@ class DT_InfoPlacementHelper
 //class RecvTable.DT_MinimapBaseEntityData
 class DT_MinimapBaseEntityData
 {
-	struct DataTable                                   visibilityDefaultFlag;                                    // 0x0000(0x0000)
-	struct DataTable                                   visibilityShowFlag;                                       // 0x0020(0x0000)
+	struct visibilityDefaultFlag                       visibilityDefaultFlag;                                    // 0x0000(0x0000)
+	struct visibilityShowFlag                          visibilityShowFlag;                                       // 0x0020(0x0000)
 	int                                                flags;                                                    // 0x0040(0x0004)
 	int                                                zOrder;                                                   // 0x0044(0x0004)
 	int                                                customState;                                              // 0x0048(0x0004)
@@ -1491,20 +1838,20 @@ class DT_MinimapBaseEntityData
 //class RecvTable.DT_HealthKit
 class DT_HealthKit
 {
-	struct DataTable                                   DT_HealthKit;                                             // 0x0000(0x0000)
-	struct DataTable                                   m_minimapData;                                            // 0x0968(0x0000)
+	struct DT_BaseAnimating                            DT_HealthKit;                                             // 0x0000(0x0000)
+	struct DT_MinimapBaseEntityData                    m_minimapData;                                            // 0x0968(0x0000)
 };
 
 //class RecvTable.DT_BaseParticleEntity
 class DT_BaseParticleEntity
 {
-	struct DataTable                                   DT_BaseParticleEntity;                                    // 0x0000(0x0000)
+	struct DT_BaseEntity                               DT_BaseParticleEntity;                                    // 0x0000(0x0000)
 };
 
 //class RecvTable.DT_BaseToggle
 class DT_BaseToggle
 {
-	struct DataTable                                   DT_BaseToggle;                                            // 0x0000(0x0000)
+	struct DT_BaseEntity                               DT_BaseToggle;                                            // 0x0000(0x0000)
 	struct Vector                                      m_vecFinalDest;                                           // 0x0A74(0x000C)
 	int                                                m_movementType;                                           // 0x0A80(0x0004)
 	struct Time                                        m_flMoveTargetTime;                                       // 0x0A84(0x0004)
@@ -1513,7 +1860,7 @@ class DT_BaseToggle
 //class RecvTable.DT_BaseTrigger
 class DT_BaseTrigger
 {
-	struct DataTable                                   DT_BaseTrigger;                                           // 0x0000(0x0000)
+	struct DT_BaseToggle                               DT_BaseTrigger;                                           // 0x0000(0x0000)
 	int                                                m_spawnflags;                                             // 0x0094(0x0004)
 	int                                                m_bClientSidePredicted;                                   // 0x0A90(0x0001)
 };
@@ -1521,7 +1868,7 @@ class DT_BaseTrigger
 //class RecvTable.DT_TriggerSlip
 class DT_TriggerSlip
 {
-	struct DataTable                                   DT_TriggerSlip;                                           // 0x0000(0x0000)
+	struct DT_BaseTrigger                              DT_TriggerSlip;                                           // 0x0000(0x0000)
 	struct Vector                                      m_defaultSlipDirection;                                   // 0x0AA0(0x000C)
 	float                                              m_slipSpeed;                                              // 0x0AAC(0x0004)
 	float                                              m_slipAcceleration;                                       // 0x0AB0(0x0004)
@@ -1530,13 +1877,13 @@ class DT_TriggerSlip
 //class RecvTable.DT_TriggerPlayerMovement
 class DT_TriggerPlayerMovement
 {
-	struct DataTable                                   DT_TriggerPlayerMovement;                                 // 0x0000(0x0000)
+	struct DT_BaseTrigger                              DT_TriggerPlayerMovement;                                 // 0x0000(0x0000)
 };
 
 //class RecvTable.DT_TriggerPointGravity
 class DT_TriggerPointGravity
 {
-	struct DataTable                                   DT_TriggerPointGravity;                                   // 0x0000(0x0000)
+	struct DT_BaseTrigger                              DT_TriggerPointGravity;                                   // 0x0000(0x0000)
 	float                                              m_pullOuterRadius;                                        // 0x0AA0(0x0004)
 	float                                              m_pullInnerRadius;                                        // 0x0AA4(0x0004)
 	float                                              m_reduceSpeedOuterRadius;                                 // 0x0AA8(0x0004)
@@ -1549,7 +1896,7 @@ class DT_TriggerPointGravity
 //class RecvTable.DT_TriggerCylinderHeavy
 class DT_TriggerCylinderHeavy
 {
-	struct DataTable                                   DT_TriggerCylinderHeavy;                                  // 0x0000(0x0000)
+	struct DT_BaseTrigger                              DT_TriggerCylinderHeavy;                                  // 0x0000(0x0000)
 	struct BitMask                                     m_triggerFilterMask;                                      // 0x0AA0(0x0008)
 	float                                              m_radius;                                                 // 0x0AA8(0x0004)
 	float                                              m_aboveHeight;                                            // 0x0AAC(0x0004)
@@ -1596,8 +1943,8 @@ class DT_TriggerCylinderHeavy
 class DT_StatusEffectPlugin
 {
 	int                                                m_hOwnerEntity;                                           // 0x04A8(0x0004)
-	struct DataTable                                   m_statusEffectsTimedPluginNV;                             // 0x0A60(0x0000)
-	struct DataTable                                   m_statusEffectsEndlessPluginNV;                           // 0x0A78(0x0000)
+	struct m_statusEffectsTimedPluginNV                m_statusEffectsTimedPluginNV;                             // 0x0A60(0x0000)
+	struct m_statusEffectsEndlessPluginNV              m_statusEffectsEndlessPluginNV;                           // 0x0A78(0x0000)
 };
 
 //class RecvTable.DT_ScriptMoverTrainNode
@@ -1632,7 +1979,7 @@ class DT_DoorMover
 	int                                                m_networkedFlags;                                         // 0x03F0(0x0004)
 	struct Vector                                      m_vecVelocity;                                            // 0x0488(0x000C)
 	struct Vector                                      m_localAngles;                                            // 0x0494(0x000C)
-	struct DataTable                                   m_Collision;                                              // 0x04C0(0x0000)
+	struct DT_CollisionProperty                        m_Collision;                                              // 0x04C0(0x0000)
 	int                                                m_CollisionGroup;                                         // 0x0540(0x0004)
 	string                                             m_iSignifierName;                                         // 0x0580(0x0000)
 	int                                                m_scriptNameIndex;                                        // 0x0690(0x0004)
@@ -1688,7 +2035,7 @@ class DT_ScriptMoverLightweight
 	float                                              m_trainLastSpeed;                                         // 0x17D4(0x0004)
 	int                                                m_trainFollowMover;                                       // 0x17D8(0x0004)
 	float                                              m_trainFollowDistance;                                    // 0x17DC(0x0004)
-	struct DataTable                                   m_trainBreadcrumb;                                        // 0x17E0(0x0000)
+	struct m_trainBreadcrumb                           m_trainBreadcrumb;                                        // 0x17E0(0x0000)
 	int                                                m_trainBreadcrumbBegin;                                   // 0x1800(0x0004)
 	int                                                m_trainBreadcrumbCount;                                   // 0x1804(0x0004)
 	float                                              m_trainAutoRollStrength;                                  // 0x1808(0x0004)
@@ -1712,7 +2059,7 @@ class DT_ScriptMoverLightweight
 //class RecvTable.DT_ScriptProp
 class DT_ScriptProp
 {
-	struct DataTable                                   DT_ScriptProp;                                            // 0x0000(0x0000)
+	struct DT_DynamicProp                              DT_ScriptProp;                                            // 0x0000(0x0000)
 	float                                              m_cloakEndTime;                                           // 0x019C(0x0004)
 	struct Time                                        m_cloakFadeInEndTime;                                     // 0x01A0(0x0004)
 	float                                              m_cloakFadeOutStartTime;                                  // 0x01A4(0x0004)
@@ -1722,7 +2069,7 @@ class DT_ScriptProp
 	int                                                m_networkedFlags;                                         // 0x03F0(0x0004)
 	int                                                m_iHealth;                                                // 0x043C(0x0004)
 	int                                                m_iMaxHealth;                                             // 0x0578(0x0004)
-	struct DataTable                                   m_minimapData;                                            // 0x0968(0x0000)
+	struct DT_MinimapBaseEntityData                    m_minimapData;                                            // 0x0968(0x0000)
 	int                                                m_nameVisibilityFlags;                                    // 0x09B8(0x0004)
 	string                                             m_title;                                                  // 0x16A0(0x0000)
 	string                                             m_footstepType;                                           // 0x16C0(0x0000)
@@ -1736,7 +2083,7 @@ class DT_ScriptProp
 //class RecvTable.DT_ScriptMover
 class DT_ScriptMover
 {
-	struct DataTable                                   DT_ScriptMover;                                           // 0x0000(0x0000)
+	struct DT_ScriptProp                               DT_ScriptMover;                                           // 0x0000(0x0000)
 	int                                                m_parentAttachment;                                       // 0x0020(0x0001)
 	struct Vector                                      m_vecAngVelocity;                                         // 0x0128(0x000C)
 	struct Vector                                      m_vecVelocity;                                            // 0x0488(0x000C)
@@ -1752,7 +2099,7 @@ class DT_ScriptNetData
 //class RecvTable.DT_ScriptNetData_SNDC_GLOBAL_NON_REWIND
 class DT_ScriptNetData_SNDC_GLOBAL_NON_REWIND
 {
-	struct DataTable                                   DT_ScriptNetData_SNDC_GLOBAL_NON_REWIND;                  // 0x0000(0x0000)
+	struct DT_ScriptNetData                            DT_ScriptNetData_SNDC_GLOBAL_NON_REWIND;                  // 0x0000(0x0000)
 	struct Array                                       m_bools;                                                  // 0x0000(0x0012)
 	struct Array                                       m_ranges;                                                 // 0x0000(0x0044)
 	struct Array                                       m_int32s;                                                 // 0x0000(0x0028)
@@ -1763,13 +2110,13 @@ class DT_ScriptNetData_SNDC_GLOBAL_NON_REWIND
 //class RecvTable.DT_ScriptNetDataGlobalNonRewind
 class DT_ScriptNetDataGlobalNonRewind
 {
-	struct DataTable                                   DT_ScriptNetDataGlobalNonRewind;                          // 0x0000(0x0000)
+	struct DT_ScriptNetData_SNDC_GLOBAL_NON_REWIND     DT_ScriptNetDataGlobalNonRewind;                          // 0x0000(0x0000)
 };
 
 //class RecvTable.DT_ScriptNetData_SNDC_GLOBAL
 class DT_ScriptNetData_SNDC_GLOBAL
 {
-	struct DataTable                                   DT_ScriptNetData_SNDC_GLOBAL;                             // 0x0000(0x0000)
+	struct DT_ScriptNetData                            DT_ScriptNetData_SNDC_GLOBAL;                             // 0x0000(0x0000)
 	struct Array                                       m_bools;                                                  // 0x0000(0x0012)
 	struct Array                                       m_ranges;                                                 // 0x0000(0x0044)
 	struct Array                                       m_int32s;                                                 // 0x0000(0x0028)
@@ -1780,13 +2127,13 @@ class DT_ScriptNetData_SNDC_GLOBAL
 //class RecvTable.DT_ScriptNetDataGlobal
 class DT_ScriptNetDataGlobal
 {
-	struct DataTable                                   DT_ScriptNetDataGlobal;                                   // 0x0000(0x0000)
+	struct DT_ScriptNetData_SNDC_GLOBAL                DT_ScriptNetDataGlobal;                                   // 0x0000(0x0000)
 };
 
 //class RecvTable.DT_ScriptNetData_SNDC_DEATH_BOX
 class DT_ScriptNetData_SNDC_DEATH_BOX
 {
-	struct DataTable                                   DT_ScriptNetData_SNDC_DEATH_BOX;                          // 0x0000(0x0000)
+	struct DT_ScriptNetData                            DT_ScriptNetData_SNDC_DEATH_BOX;                          // 0x0000(0x0000)
 	struct Array                                       m_bools;                                                  // 0x0000(0x0004)
 	struct Array                                       m_ranges;                                                 // 0x0000(0x0024)
 	struct Array                                       m_int32s;                                                 // 0x0000(0x000C)
@@ -1797,7 +2144,7 @@ class DT_ScriptNetData_SNDC_DEATH_BOX
 //class RecvTable.DT_ScriptNetData_SNDC_TITAN_SOUL
 class DT_ScriptNetData_SNDC_TITAN_SOUL
 {
-	struct DataTable                                   DT_ScriptNetData_SNDC_TITAN_SOUL;                         // 0x0000(0x0000)
+	struct DT_ScriptNetData                            DT_ScriptNetData_SNDC_TITAN_SOUL;                         // 0x0000(0x0000)
 	struct Array                                       m_bools;                                                  // 0x0000(0x000A)
 	struct Array                                       m_ranges;                                                 // 0x0000(0x0024)
 	struct Array                                       m_int32s;                                                 // 0x0000(0x0010)
@@ -1808,7 +2155,7 @@ class DT_ScriptNetData_SNDC_TITAN_SOUL
 //class RecvTable.DT_ScriptNetData_SNDC_PLAYER_EXCLUSIVE_EXPANDED
 class DT_ScriptNetData_SNDC_PLAYER_EXCLUSIVE_EXPANDED
 {
-	struct DataTable                                   DT_ScriptNetData_SNDC_PLAYER_EXCLUSIVE_EXPANDED;          // 0x0000(0x0000)
+	struct DT_ScriptNetData                            DT_ScriptNetData_SNDC_PLAYER_EXCLUSIVE_EXPANDED;          // 0x0000(0x0000)
 	struct Array                                       m_bools;                                                  // 0x0000(0x001A)
 	struct Array                                       m_ranges;                                                 // 0x0000(0x00BC)
 	struct Array                                       m_int32s;                                                 // 0x0000(0x0018)
@@ -1819,7 +2166,7 @@ class DT_ScriptNetData_SNDC_PLAYER_EXCLUSIVE_EXPANDED
 //class RecvTable.DT_ScriptNetData_SNDC_PLAYER_EXCLUSIVE
 class DT_ScriptNetData_SNDC_PLAYER_EXCLUSIVE
 {
-	struct DataTable                                   DT_ScriptNetData_SNDC_PLAYER_EXCLUSIVE;                   // 0x0000(0x0000)
+	struct DT_ScriptNetData                            DT_ScriptNetData_SNDC_PLAYER_EXCLUSIVE;                   // 0x0000(0x0000)
 	struct Array                                       m_bools;                                                  // 0x0000(0x001A)
 	struct Array                                       m_ranges;                                                 // 0x0000(0x0044)
 	struct Array                                       m_int32s;                                                 // 0x0000(0x0018)
@@ -1830,7 +2177,7 @@ class DT_ScriptNetData_SNDC_PLAYER_EXCLUSIVE
 //class RecvTable.DT_ScriptNetData_SNDC_PLAYER_GLOBAL
 class DT_ScriptNetData_SNDC_PLAYER_GLOBAL
 {
-	struct DataTable                                   DT_ScriptNetData_SNDC_PLAYER_GLOBAL;                      // 0x0000(0x0000)
+	struct DT_ScriptNetData                            DT_ScriptNetData_SNDC_PLAYER_GLOBAL;                      // 0x0000(0x0000)
 	struct Array                                       m_bools;                                                  // 0x0000(0x0012)
 	struct Array                                       m_ranges;                                                 // 0x0000(0x0044)
 	struct Array                                       m_int32s;                                                 // 0x0000(0x0038)
@@ -1905,11 +2252,11 @@ class DT_PlayerWaypoint
 	struct BitMask                                     m_realmsBitMask;                                          // 0x0A48(0x0008)
 	int                                                m_waypointType;                                           // 0x0A60(0x0004)
 	int                                                m_waypointBitfield;                                       // 0x0A64(0x0004)
-	struct DataTable                                   m_waypointEnts;                                           // 0x0A68(0x0000)
-	struct DataTable                                   m_waypointVectors;                                        // 0x0A88(0x0000)
-	struct DataTable                                   m_waypointGameTimes;                                      // 0x0AE8(0x0000)
-	struct DataTable                                   m_waypointInts;                                           // 0x0B08(0x0000)
-	struct DataTable                                   m_waypointFloats;                                         // 0x0B28(0x0000)
+	struct m_waypointEnts                              m_waypointEnts;                                           // 0x0A68(0x0000)
+	struct m_waypointVectors                           m_waypointVectors;                                        // 0x0A88(0x0000)
+	struct m_waypointGameTimes                         m_waypointGameTimes;                                      // 0x0AE8(0x0000)
+	struct m_waypointInts                              m_waypointInts;                                           // 0x0B08(0x0000)
+	struct m_waypointFloats                            m_waypointFloats;                                         // 0x0B28(0x0000)
 	int                                                m_objectivePackedInt;                                     // 0x0B48(0x0004)
 	string                                             m_waypointGroupName;                                      // 0x0B4C(0x0000)
 	int                                                m_waypointGroupFlags;                                     // 0x0B6C(0x0004)
@@ -1923,18 +2270,18 @@ class DT_PlayerWaypoint
 //class RecvTable.DT_PlayerTasklist
 class DT_PlayerTasklist
 {
-	struct DataTable                                   DT_PlayerTasklist;                                        // 0x0000(0x0000)
+	struct DT_BaseEntity                               DT_PlayerTasklist;                                        // 0x0000(0x0000)
 	struct Time                                        m_notifyTime;                                             // 0x0A60(0x0004)
 	int                                                m_customInt;                                              // 0x0A64(0x0004)
-	struct DataTable                                   m_taskStatus;                                             // 0x0A68(0x0000)
-	struct DataTable                                   m_taskType;                                               // 0x0A9C(0x0000)
-	struct DataTable                                   m_taskCountGoal;                                          // 0x0AD0(0x0000)
-	struct DataTable                                   m_taskCountNow;                                           // 0x0B04(0x0000)
-	struct DataTable                                   m_taskFlags;                                              // 0x0B38(0x0000)
-	struct DataTable                                   m_taskGameTimes;                                          // 0x0B6C(0x0000)
-	struct DataTable                                   m_taskInts;                                               // 0x0BA0(0x0000)
-	struct DataTable                                   m_taskFloats;                                             // 0x0BD4(0x0000)
-	struct DataTable                                   m_taskEnts;                                               // 0x0C08(0x0000)
+	struct m_taskStatus                                m_taskStatus;                                             // 0x0A68(0x0000)
+	struct m_taskType                                  m_taskType;                                               // 0x0A9C(0x0000)
+	struct m_taskCountGoal                             m_taskCountGoal;                                          // 0x0AD0(0x0000)
+	struct m_taskCountNow                              m_taskCountNow;                                           // 0x0B04(0x0000)
+	struct m_taskFlags                                 m_taskFlags;                                              // 0x0B38(0x0000)
+	struct m_taskGameTimes                             m_taskGameTimes;                                          // 0x0B6C(0x0000)
+	struct m_taskInts                                  m_taskInts;                                               // 0x0BA0(0x0000)
+	struct m_taskFloats                                m_taskFloats;                                             // 0x0BD4(0x0000)
+	struct m_taskEnts                                  m_taskEnts;                                               // 0x0C08(0x0000)
 	string                                             m_taskStringA;                                            // 0x0C3C(0x0000)
 	string                                             m_taskStringB;                                            // 0x0C7C(0x0000)
 	string                                             m_taskStringC;                                            // 0x0CBC(0x0000)
@@ -1953,13 +2300,13 @@ class DT_PlayerTasklist
 //class RecvTable.DT_EnvDecoy
 class DT_EnvDecoy
 {
-	struct DataTable                                   DT_EnvDecoy;                                              // 0x0000(0x0000)
+	struct DT_BaseAnimating                            DT_EnvDecoy;                                              // 0x0000(0x0000)
 };
 
 //class RecvTable.DT_PlayerDecoy
 class DT_PlayerDecoy
 {
-	struct DataTable                                   DT_PlayerDecoy;                                           // 0x0000(0x0000)
+	struct DT_BaseAnimating                            DT_PlayerDecoy;                                           // 0x0000(0x0000)
 	float                                              m_vecViewOffset.x;                                        // 0x0034(0x0004)
 	float                                              m_vecViewOffset.y;                                        // 0x0038(0x0004)
 	float                                              m_vecViewOffset.z;                                        // 0x003C(0x0004)
@@ -1983,20 +2330,20 @@ class DT_PlayerDecoy
 //class RecvTable.DT_GlobalNonRewinding
 class DT_GlobalNonRewinding
 {
-	struct DataTable                                   m_playerObserver;                                         // 0x0A60(0x0000)
-	struct DataTable                                   m_playerMiscData;                                         // 0x0E60(0x0000)
+	struct m_playerObserver                            m_playerObserver;                                         // 0x0A60(0x0000)
+	struct m_playerMiscData                            m_playerMiscData;                                         // 0x0E60(0x0000)
 };
 
 //class RecvTable.DT_EntityBlocker
 class DT_EntityBlocker
 {
-	struct DataTable                                   DT_EntityBlocker;                                         // 0x0000(0x0000)
+	struct DT_BaseEntity                               DT_EntityBlocker;                                         // 0x0000(0x0000)
 };
 
 //class RecvTable.DT_TEScriptParticleSystemOnEntity
 class DT_TEScriptParticleSystemOnEntity
 {
-	struct DataTable                                   DT_TEScriptParticleSystemOnEntity;                        // 0x0000(0x0000)
+	struct DT_BaseTempEntity                           DT_TEScriptParticleSystemOnEntity;                        // 0x0000(0x0000)
 	int                                                m_effectIndex;                                            // 0x0028(0x0004)
 	int                                                m_ent;                                                    // 0x002C(0x0004)
 	int                                                m_attachType;                                             // 0x0030(0x0004)
@@ -2008,7 +2355,7 @@ class DT_TEScriptParticleSystemOnEntity
 //class RecvTable.DT_TEScriptParticleSystemOnEntityWithPos
 class DT_TEScriptParticleSystemOnEntityWithPos
 {
-	struct DataTable                                   DT_TEScriptParticleSystemOnEntityWithPos;                 // 0x0000(0x0000)
+	struct DT_TEScriptParticleSystemOnEntity           DT_TEScriptParticleSystemOnEntityWithPos;                 // 0x0000(0x0000)
 	struct Vector                                      m_origin;                                                 // 0x0040(0x000C)
 	struct Vector                                      m_angles;                                                 // 0x004C(0x000C)
 };
@@ -2016,7 +2363,7 @@ class DT_TEScriptParticleSystemOnEntityWithPos
 //class RecvTable.DT_TEScriptParticleSystem
 class DT_TEScriptParticleSystem
 {
-	struct DataTable                                   DT_TEScriptParticleSystem;                                // 0x0000(0x0000)
+	struct DT_BaseTempEntity                           DT_TEScriptParticleSystem;                                // 0x0000(0x0000)
 	int                                                m_effectIndex;                                            // 0x0028(0x0004)
 	struct Vector                                      m_origin;                                                 // 0x002C(0x000C)
 	struct Vector                                      m_angles;                                                 // 0x0038(0x000C)
@@ -2026,7 +2373,7 @@ class DT_TEScriptParticleSystem
 //class RecvTable.DT_CPropDoor
 class DT_CPropDoor
 {
-	struct DataTable                                   HighlightSettings;                                        // 0x0000(0x0000)
+	struct DT_HighlightSettings                        HighlightSettings;                                        // 0x0000(0x0000)
 	int                                                m_fEffects;                                               // 0x0040(0x0004)
 	int                                                m_usableType;                                             // 0x0044(0x0004)
 	int                                                m_cellX;                                                  // 0x0048(0x0004)
@@ -2077,7 +2424,7 @@ class DT_InfoTarget
 //class RecvTable.DT_InfoTargetGravity
 class DT_InfoTargetGravity
 {
-	struct DataTable                                   DT_InfoTargetGravity;                                     // 0x0000(0x0000)
+	struct DT_InfoTarget                               DT_InfoTargetGravity;                                     // 0x0000(0x0000)
 	int                                                m_gravityDirectionType;                                   // 0x0A60(0x0004)
 	int                                                m_gravityPair;                                            // 0x0A68(0x0004)
 };
@@ -2085,55 +2432,55 @@ class DT_InfoTargetGravity
 //class RecvTable.DT_InfoTargetMinimap
 class DT_InfoTargetMinimap
 {
-	struct DataTable                                   DT_InfoTargetMinimap;                                     // 0x0000(0x0000)
-	struct DataTable                                   m_minimapData;                                            // 0x0968(0x0000)
+	struct DT_InfoTarget                               DT_InfoTargetMinimap;                                     // 0x0000(0x0000)
+	struct DT_MinimapBaseEntityData                    m_minimapData;                                            // 0x0968(0x0000)
 };
 
 //class RecvTable.DT_BaseViewModel
 class DT_BaseViewModel
 {
-	struct DataTable                                   overlay_vars;                                             // 0x0000(0x0000)
+	struct DT_OverlayVars                              overlay_vars;                                             // 0x0000(0x0000)
 	struct Time                                        m_animStartTime;                                          // 0x0008(0x0004)
-	struct DataTable                                   m_animOverlayIsActive;                                    // 0x0008(0x0000)
+	struct m_animOverlayIsActive                       m_animOverlayIsActive;                                    // 0x0008(0x0000)
 	float                                              m_animStartCycle;                                         // 0x000C(0x0004)
 	float                                              m_animPlaybackRate;                                       // 0x0010(0x0004)
 	int                                                m_animModelIndex;                                         // 0x0014(0x0004)
-	struct DataTable                                   m_animOverlayStartTime;                                   // 0x0014(0x0000)
+	struct m_animOverlayStartTime                      m_animOverlayStartTime;                                   // 0x0014(0x0000)
 	int                                                m_nNewSequenceParity;                                     // 0x0018(0x0004)
 	int                                                m_animSequence;                                           // 0x0020(0x0002)
 	int                                                m_animFrozen;                                             // 0x0022(0x0001)
-	struct DataTable                                   m_animOverlayStartCycle;                                  // 0x0038(0x0000)
+	struct m_animOverlayStartCycle                     m_animOverlayStartCycle;                                  // 0x0038(0x0000)
 	int                                                m_fEffects;                                               // 0x0040(0x0004)
 	int                                                m_clrRender;                                              // 0x0050(0x0004)
-	struct DataTable                                   m_animOverlayPlaybackRate;                                // 0x005C(0x0000)
+	struct m_animOverlayPlaybackRate                   m_animOverlayPlaybackRate;                                // 0x005C(0x0000)
 	int                                                m_nModelIndex;                                            // 0x0060(0x0004)
-	struct DataTable                                   m_animOverlayModelIndex;                                  // 0x0080(0x0000)
-	struct DataTable                                   m_animOverlaySequence;                                    // 0x00A4(0x0000)
-	struct DataTable                                   m_animOverlayWeight;                                      // 0x00B8(0x0000)
-	struct DataTable                                   m_animOverlayOrder;                                       // 0x00DC(0x0000)
-	struct DataTable                                   m_animOverlayAnimTime;                                    // 0x0100(0x0000)
-	struct DataTable                                   m_animOverlayFadeInDuration;                              // 0x0124(0x0000)
-	struct DataTable                                   m_animOverlayFadeOutDuration;                             // 0x0148(0x0000)
+	struct m_animOverlayModelIndex                     m_animOverlayModelIndex;                                  // 0x0080(0x0000)
+	struct m_animOverlaySequence                       m_animOverlaySequence;                                    // 0x00A4(0x0000)
+	struct m_animOverlayWeight                         m_animOverlayWeight;                                      // 0x00B8(0x0000)
+	struct m_animOverlayOrder                          m_animOverlayOrder;                                       // 0x00DC(0x0000)
+	struct m_animOverlayAnimTime                       m_animOverlayAnimTime;                                    // 0x0100(0x0000)
+	struct m_animOverlayFadeInDuration                 m_animOverlayFadeInDuration;                              // 0x0124(0x0000)
+	struct m_animOverlayFadeOutDuration                m_animOverlayFadeOutDuration;                             // 0x0148(0x0000)
 	int                                                m_nRenderMode;                                            // 0x04B9(0x0001)
 	int                                                m_nBody;                                                  // 0x0E58(0x0004)
 	struct Time                                        m_nResetEventsStartTime;                                  // 0x0E64(0x0004)
 	int                                                m_nResetEventsParity;                                     // 0x0E68(0x0004)
 	int                                                m_bSequenceFinished;                                      // 0x0EFC(0x0001)
 	float                                              m_flModelScale;                                           // 0x0F08(0x0004)
-	struct DataTable                                   m_overlayEventParity;                                     // 0x1751(0x0000)
+	struct m_overlayEventParity                        m_overlayEventParity;                                     // 0x1751(0x0000)
 	int                                                m_viewModelOwner;                                         // 0x19D4(0x0004)
 	int                                                m_projectileIsVisible;                                    // 0x19D8(0x0001)
 	int                                                m_bBlockEventLayer;                                       // 0x1DD0(0x0001)
 	int                                                m_isAdsTransition;                                        // 0x1DD1(0x0001)
 	int                                                m_hWeapon;                                                // 0x1DD4(0x0004)
-	struct DataTable                                   m_tracerAttachments;                                      // 0x1DD8(0x0000)
-	struct DataTable                                   m_tracerAttachmentsScoped;                                // 0x1DDA(0x0000)
+	struct m_tracerAttachments                         m_tracerAttachments;                                      // 0x1DD8(0x0000)
+	struct m_tracerAttachmentsScoped                   m_tracerAttachmentsScoped;                                // 0x1DDA(0x0000)
 };
 
 //class RecvTable.DT_BaseGrenade
 class DT_BaseGrenade
 {
-	struct DataTable                                   DT_BaseGrenade;                                           // 0x0000(0x0000)
+	struct DT_Projectile                               DT_BaseGrenade;                                           // 0x0000(0x0000)
 	int                                                moveparent;                                               // 0x001C(0x0004)
 	int                                                m_parentAttachment;                                       // 0x0020(0x0001)
 	int                                                m_baseTakeDamage;                                         // 0x07BC(0x0001)
@@ -2148,7 +2495,7 @@ class DT_BaseGrenade
 //class RecvTable.DT_World
 class DT_World
 {
-	struct DataTable                                   DT_World;                                                 // 0x0000(0x0000)
+	struct DT_BaseEntity                               DT_World;                                                 // 0x0000(0x0000)
 	struct Vector                                      m_WorldMins;                                              // 0x0A60(0x000C)
 	struct Vector                                      m_WorldMaxs;                                              // 0x0A6C(0x000C)
 	int                                                m_bStartDark;                                             // 0x0A78(0x0001)
@@ -2156,30 +2503,30 @@ class DT_World
 	int                                                m_worldFlags;                                             // 0x0A94(0x0004)
 	int                                                m_timeshiftArmDeviceSkin;                                 // 0x0A98(0x0004)
 	int                                                m_spTitanLoadoutUnlocks;                                  // 0x0A9C(0x0004)
-	struct DataTable                                   m_deathFieldIsActive;                                     // 0x0AA0(0x0000)
-	struct DataTable                                   m_deathFieldOrigin;                                       // 0x0AE0(0x0000)
-	struct DataTable                                   m_deathFieldRadiusStart;                                  // 0x0DE0(0x0000)
-	struct DataTable                                   m_deathFieldRadiusEnd;                                    // 0x0EE0(0x0000)
-	struct DataTable                                   m_deathFieldTimeStart;                                    // 0x0FE0(0x0000)
-	struct DataTable                                   m_deathFieldTimeEnd;                                      // 0x10E0(0x0000)
+	struct m_deathFieldIsActive                        m_deathFieldIsActive;                                     // 0x0AA0(0x0000)
+	struct m_deathFieldOrigin                          m_deathFieldOrigin;                                       // 0x0AE0(0x0000)
+	struct m_deathFieldRadiusStart                     m_deathFieldRadiusStart;                                  // 0x0DE0(0x0000)
+	struct m_deathFieldRadiusEnd                       m_deathFieldRadiusEnd;                                    // 0x0EE0(0x0000)
+	struct m_deathFieldTimeStart                       m_deathFieldTimeStart;                                    // 0x0FE0(0x0000)
+	struct m_deathFieldTimeEnd                         m_deathFieldTimeEnd;                                      // 0x10E0(0x0000)
 	int                                                m_teamRelationRulesForPVE;                                // 0x11E0(0x0001)
-	struct DataTable                                   m_civilTeamsMaskA;                                        // 0x11E8(0x0000)
-	struct DataTable                                   m_civilTeamsMaskB;                                        // 0x11F8(0x0000)
-	struct DataTable                                   m_rabidTeamsMask;                                         // 0x1210(0x0000)
+	struct m_civilTeamsMaskA                           m_civilTeamsMaskA;                                        // 0x11E8(0x0000)
+	struct m_civilTeamsMaskB                           m_civilTeamsMaskB;                                        // 0x11F8(0x0000)
+	struct m_rabidTeamsMask                            m_rabidTeamsMask;                                         // 0x1210(0x0000)
 };
 
 //class RecvTable.DT_EntityLinkPage
 class DT_EntityLinkPage
 {
 	int                                                pageIndex;                                                // 0x0A60(0x0004)
-	struct DataTable                                   next;                                                     // 0x0A64(0x0000)
-	struct DataTable                                   entity;                                                   // 0x0E64(0x0000)
+	struct next                                        next;                                                     // 0x0A64(0x0000)
+	struct entity                                      entity;                                                   // 0x0E64(0x0000)
 };
 
 //class RecvTable.DT_WaterLODControl
 class DT_WaterLODControl
 {
-	struct DataTable                                   DT_WaterLODControl;                                       // 0x0000(0x0000)
+	struct DT_BaseEntity                               DT_WaterLODControl;                                       // 0x0000(0x0000)
 	float                                              m_flCheapWaterStartDistance;                              // 0x0A60(0x0004)
 	float                                              m_flCheapWaterEndDistance;                                // 0x0A64(0x0004)
 };
@@ -2187,7 +2534,7 @@ class DT_WaterLODControl
 //class RecvTable.DT_VGuiScreen
 class DT_VGuiScreen
 {
-	struct DataTable                                   DT_VGuiScreen;                                            // 0x0000(0x0000)
+	struct DT_BaseEntity                               DT_VGuiScreen;                                            // 0x0000(0x0000)
 	float                                              m_flWidth;                                                // 0x0A60(0x0004)
 	float                                              m_flHeight;                                               // 0x0A64(0x0004)
 	int                                                m_nPanelName;                                             // 0x0A70(0x0004)
@@ -2210,7 +2557,7 @@ class DT_VehicleDriverExclusive
 	struct Vector                                      m_hoverVehicleLookAheadAcceleration;                      // 0x1AD8(0x000C)
 	int                                                m_hoverVehicleDebugFlyMode;                               // 0x1AEC(0x0001)
 	struct Vector                                      m_hoverVehiclePhysPush;                                   // 0x1B20(0x000C)
-	struct DataTable                                   m_pushedFixedPointOffset;                                 // 0x1C54(0x0000)
+	struct m_pushedFixedPointOffset                    m_pushedFixedPointOffset;                                 // 0x1C54(0x0000)
 };
 
 //class RecvTable.DT_VehicleNonDriverExclusive
@@ -2226,9 +2573,9 @@ class DT_VehicleNonDriverExclusive
 //class RecvTable.DT_PlayerVehicle
 class DT_PlayerVehicle
 {
-	struct DataTable                                   DT_PlayerVehicle;                                         // 0x0000(0x0000)
-	struct DataTable                                   vehicledriverdata;                                        // 0x0000(0x0000)
-	struct DataTable                                   vehiclenondriverdata;                                     // 0x0000(0x0000)
+	struct DT_BaseAnimatingOverlay                     DT_PlayerVehicle;                                         // 0x0000(0x0000)
+	struct DT_VehicleDriverExclusive                   vehicledriverdata;                                        // 0x0000(0x0000)
+	struct DT_VehicleNonDriverExclusive                vehiclenondriverdata;                                     // 0x0000(0x0000)
 	struct Array                                       m_vehiclePlayers;                                         // 0x0000(0x0010)
 	float                                              m_vecViewOffset.x;                                        // 0x0034(0x0004)
 	float                                              m_vecViewOffset.y;                                        // 0x0038(0x0004)
@@ -2261,9 +2608,9 @@ class DT_PlayerVehicle
 	int                                                m_hoverVehicleFrictionSurfPropOther;                      // 0x1B04(0x0004)
 	struct Vector                                      m_hoverVehicleFrictionNormal;                             // 0x1B08(0x000C)
 	struct Vector                                      m_hoverVehicleFrictionPos;                                // 0x1B14(0x000C)
-	struct DataTable                                   m_hoverVehicleSeats;                                      // 0x1B2C(0x0000)
-	struct DataTable                                   m_abilityAttachmentEnts;                                  // 0x1B50(0x0000)
-	struct DataTable                                   m_abilityAttachmentInts;                                  // 0x1B58(0x0000)
+	struct m_hoverVehicleSeats                         m_hoverVehicleSeats;                                      // 0x1B2C(0x0000)
+	struct m_abilityAttachmentEnts                     m_abilityAttachmentEnts;                                  // 0x1B50(0x0000)
+	struct m_abilityAttachmentInts                     m_abilityAttachmentInts;                                  // 0x1B58(0x0000)
 	struct Vector                                      m_overrideVehicleAngles;                                  // 0x1C38(0x000C)
 	int                                                m_overrideVehicleAnglesUntilTick;                         // 0x1C44(0x0004)
 	int                                                m_pushingEnt;                                             // 0x1C6C(0x0004)
@@ -2273,37 +2620,37 @@ class DT_PlayerVehicle
 //class RecvTable.DT_TriggerUpdraft
 class DT_TriggerUpdraft
 {
-	struct DataTable                                   DT_TriggerUpdraft;                                        // 0x0000(0x0000)
+	struct DT_BaseTrigger                              DT_TriggerUpdraft;                                        // 0x0000(0x0000)
 };
 
 //class RecvTable.DT_TriggerNoObjectPlacement
 class DT_TriggerNoObjectPlacement
 {
-	struct DataTable                                   DT_TriggerNoObjectPlacement;                              // 0x0000(0x0000)
+	struct DT_BaseTrigger                              DT_TriggerNoObjectPlacement;                              // 0x0000(0x0000)
 };
 
 //class RecvTable.DT_TriggerNoZipline
 class DT_TriggerNoZipline
 {
-	struct DataTable                                   DT_TriggerNoZipline;                                      // 0x0000(0x0000)
+	struct DT_BaseTrigger                              DT_TriggerNoZipline;                                      // 0x0000(0x0000)
 };
 
 //class RecvTable.DT_TriggerNoGrapple
 class DT_TriggerNoGrapple
 {
-	struct DataTable                                   DT_TriggerNoGrapple;                                      // 0x0000(0x0000)
+	struct DT_BaseTrigger                              DT_TriggerNoGrapple;                                      // 0x0000(0x0000)
 };
 
 //class RecvTable.DT_BaseVPhysicsTrigger
 class DT_BaseVPhysicsTrigger
 {
-	struct DataTable                                   DT_BaseVPhysicsTrigger;                                   // 0x0000(0x0000)
+	struct DT_BaseEntity                               DT_BaseVPhysicsTrigger;                                   // 0x0000(0x0000)
 };
 
 //class RecvTable.DT_TriggerOutOfBounds
 class DT_TriggerOutOfBounds
 {
-	struct DataTable                                   DT_TriggerOutOfBounds;                                    // 0x0000(0x0000)
+	struct DT_BaseTrigger                              DT_TriggerOutOfBounds;                                    // 0x0000(0x0000)
 };
 
 //class RecvTable.DT_SoundData
@@ -2319,14 +2666,14 @@ class DT_SoundData
 //class RecvTable.DT_TESoundDispatch
 class DT_TESoundDispatch
 {
-	struct DataTable                                   DT_TESoundDispatch;                                       // 0x0000(0x0000)
-	struct DataTable                                   m_soundData;                                              // 0x0028(0x0000)
+	struct DT_BaseTempEntity                           DT_TESoundDispatch;                                       // 0x0000(0x0000)
+	struct DT_SoundData                                m_soundData;                                              // 0x0028(0x0000)
 };
 
 //class RecvTable.DT_TEPhysicsProp
 class DT_TEPhysicsProp
 {
-	struct DataTable                                   DT_TEPhysicsProp;                                         // 0x0000(0x0000)
+	struct DT_BaseTempEntity                           DT_TEPhysicsProp;                                         // 0x0000(0x0000)
 	struct Vector                                      m_vecOrigin;                                              // 0x0028(0x000C)
 	float                                              m_angRotation.x;                                          // 0x0034(0x0004)
 	float                                              m_angRotation.y;                                          // 0x0038(0x0004)
@@ -2341,7 +2688,7 @@ class DT_TEPhysicsProp
 //class RecvTable.DT_TEParticleSystem
 class DT_TEParticleSystem
 {
-	struct DataTable                                   DT_TEParticleSystem;                                      // 0x0000(0x0000)
+	struct DT_BaseTempEntity                           DT_TEParticleSystem;                                      // 0x0000(0x0000)
 	float                                              m_vecOrigin.x;                                            // 0x0028(0x0004)
 	float                                              m_vecOrigin.y;                                            // 0x002C(0x0004)
 	float                                              m_vecOrigin.z;                                            // 0x0030(0x0004)
@@ -2350,7 +2697,7 @@ class DT_TEParticleSystem
 //class RecvTable.DT_TEShatterSurface
 class DT_TEShatterSurface
 {
-	struct DataTable                                   DT_TEShatterSurface;                                      // 0x0000(0x0000)
+	struct DT_BaseTempEntity                           DT_TEShatterSurface;                                      // 0x0000(0x0000)
 	struct Vector                                      m_vecOrigin;                                              // 0x0028(0x000C)
 	struct Vector                                      m_vecAngles;                                              // 0x0034(0x000C)
 	struct Vector                                      m_vecForce;                                               // 0x0040(0x000C)
@@ -2364,7 +2711,7 @@ class DT_TEShatterSurface
 //class RecvTable.DT_TEExplosion
 class DT_TEExplosion
 {
-	struct DataTable                                   DT_TEExplosion;                                           // 0x0000(0x0000)
+	struct DT_TEParticleSystem                         DT_TEExplosion;                                           // 0x0000(0x0000)
 	float                                              m_fScale;                                                 // 0x0038(0x0004)
 	int                                                m_nFrameRate;                                             // 0x003C(0x0004)
 	int                                                m_nFlags;                                                 // 0x0040(0x0004)
@@ -2412,14 +2759,14 @@ class DT_EffectData
 //class RecvTable.DT_TEEffectDispatch
 class DT_TEEffectDispatch
 {
-	struct DataTable                                   DT_TEEffectDispatch;                                      // 0x0000(0x0000)
-	struct DataTable                                   m_EffectData;                                             // 0x0028(0x0000)
+	struct DT_BaseTempEntity                           DT_TEEffectDispatch;                                      // 0x0000(0x0000)
+	struct DT_EffectData                               m_EffectData;                                             // 0x0028(0x0000)
 };
 
 //class RecvTable.DT_TEBreakModel
 class DT_TEBreakModel
 {
-	struct DataTable                                   DT_TEBreakModel;                                          // 0x0000(0x0000)
+	struct DT_BaseTempEntity                           DT_TEBreakModel;                                          // 0x0000(0x0000)
 	struct Vector                                      m_vecOrigin;                                              // 0x0028(0x000C)
 	float                                              m_angRotation.x;                                          // 0x0034(0x0004)
 	float                                              m_angRotation.y;                                          // 0x0038(0x0004)
@@ -2438,7 +2785,7 @@ class DT_HardPointEntity
 {
 	struct Vector                                      m_localOrigin;                                            // 0x0004(0x000C)
 	int                                                m_iTeamNum;                                               // 0x044C(0x0004)
-	struct DataTable                                   m_minimapData;                                            // 0x0968(0x0000)
+	struct DT_MinimapBaseEntityData                    m_minimapData;                                            // 0x0968(0x0000)
 	int                                                m_state;                                                  // 0x0A64(0x0004)
 	float                                              m_estimatedCaptureTime;                                   // 0x0A68(0x0004)
 	float                                              m_progressRefPoint;                                       // 0x0A6C(0x0004)
@@ -2455,7 +2802,7 @@ class DT_HardPointEntity
 //class RecvTable.DT_HardPointFrontierEntity
 class DT_HardPointFrontierEntity
 {
-	struct DataTable                                   DT_HardPointFrontierEntity;                               // 0x0000(0x0000)
+	struct DT_HardPointEntity                          DT_HardPointFrontierEntity;                               // 0x0000(0x0000)
 };
 
 //class RecvTable.DT_Team
@@ -2475,7 +2822,7 @@ class DT_Team
 //class RecvTable.DT_ImportantOnEntSound
 class DT_ImportantOnEntSound
 {
-	struct DataTable                                   DT_ImportantOnEntSound;                                   // 0x0000(0x0000)
+	struct DT_BaseEntity                               DT_ImportantOnEntSound;                                   // 0x0000(0x0000)
 	int                                                m_networkTableSoundID;                                    // 0x0A60(0x0004)
 	int                                                m_hAttachedToEntity;                                      // 0x0A64(0x0004)
 	struct Time                                        m_beginTime;                                              // 0x0A68(0x0004)
@@ -2486,14 +2833,14 @@ class DT_ImportantOnEntSound
 //class RecvTable.DT_ShieldProp
 class DT_ShieldProp
 {
-	struct DataTable                                   DT_ShieldProp;                                            // 0x0000(0x0000)
+	struct DT_DynamicProp                              DT_ShieldProp;                                            // 0x0000(0x0000)
 	int                                                m_impactEffectColorID;                                    // 0x1680(0x0001)
 };
 
 //class RecvTable.DT_FerroProp
 class DT_FerroProp
 {
-	struct DataTable                                   DT_FerroProp;                                             // 0x0000(0x0000)
+	struct DT_DynamicProp                              DT_FerroProp;                                             // 0x0000(0x0000)
 	int                                                moveparent;                                               // 0x001C(0x0004)
 	int                                                m_parentAttachment;                                       // 0x0020(0x0001)
 	int                                                m_fEffects;                                               // 0x0040(0x0004)
@@ -2503,7 +2850,7 @@ class DT_FerroProp
 	int                                                m_cellZ;                                                  // 0x0050(0x0004)
 	struct Vector                                      m_localOrigin;                                            // 0x0054(0x000C)
 	int                                                m_nModelIndex;                                            // 0x0060(0x0004)
-	struct DataTable                                   m_highlightFunctionBits;                                  // 0x02C0(0x0000)
+	struct m_highlightFunctionBits                     m_highlightFunctionBits;                                  // 0x02C0(0x0000)
 	int                                                m_networkedFlags;                                         // 0x03F0(0x0004)
 	int                                                m_visibilityFlags;                                        // 0x0444(0x0004)
 	int                                                m_iTeamNum;                                               // 0x044C(0x0004)
@@ -2512,7 +2859,7 @@ class DT_FerroProp
 	float                                              m_passThroughDirection;                                   // 0x0470(0x0004)
 	struct Vector                                      m_localAngles;                                            // 0x0494(0x000C)
 	int                                                m_hOwnerEntity;                                           // 0x04A8(0x0004)
-	struct DataTable                                   m_Collision;                                              // 0x04C0(0x0000)
+	struct DT_CollisionProperty                        m_Collision;                                              // 0x04C0(0x0000)
 	int                                                m_CollisionGroup;                                         // 0x0540(0x0004)
 	string                                             m_iSignifierName;                                         // 0x0580(0x0000)
 	string                                             m_iName;                                                  // 0x0589(0x0000)
@@ -2527,7 +2874,7 @@ class DT_FerroProp
 	float                                              m_usableDistanceOverride;                                 // 0x0928(0x0004)
 	float                                              m_usableFOV;                                              // 0x092C(0x0004)
 	float                                              m_usePromptSize;                                          // 0x0930(0x0004)
-	struct DataTable                                   m_minimapData;                                            // 0x0968(0x0000)
+	struct DT_MinimapBaseEntityData                    m_minimapData;                                            // 0x0968(0x0000)
 	int                                                m_firstChildEntityLink;                                   // 0x0A40(0x0004)
 	int                                                m_firstParentEntityLink;                                  // 0x0A44(0x0004)
 	struct BitMask                                     m_realmsBitMask;                                          // 0x0A48(0x0008)
@@ -2539,8 +2886,8 @@ class DT_FerroProp
 //class RecvTable.DT_LootGrabber
 class DT_LootGrabber
 {
-	struct DataTable                                   DT_LootGrabber;                                           // 0x0000(0x0000)
-	struct DataTable                                   m_minimapData;                                            // 0x0968(0x0000)
+	struct DT_DynamicProp                              DT_LootGrabber;                                           // 0x0000(0x0000)
+	struct DT_MinimapBaseEntityData                    m_minimapData;                                            // 0x0968(0x0000)
 	int                                                m_impactEffectColorID;                                    // 0x1680(0x0001)
 	int                                                m_lootBeingGrabbed;                                       // 0x1688(0x0004)
 	float                                              m_lootGrabDist;                                           // 0x168C(0x0004)
@@ -2558,13 +2905,13 @@ class DT_DeathBoxProp
 	int                                                m_cellZ;                                                  // 0x0050(0x0004)
 	struct Vector                                      m_localOrigin;                                            // 0x0054(0x000C)
 	int                                                m_nModelIndex;                                            // 0x0060(0x0004)
-	struct DataTable                                   m_highlightFunctionBits;                                  // 0x02C0(0x0000)
+	struct m_highlightFunctionBits                     m_highlightFunctionBits;                                  // 0x02C0(0x0000)
 	int                                                m_networkedFlags;                                         // 0x03F0(0x0004)
 	int                                                m_visibilityFlags;                                        // 0x0444(0x0004)
 	int                                                m_iTeamNum;                                               // 0x044C(0x0004)
 	struct Vector                                      m_localAngles;                                            // 0x0494(0x000C)
 	int                                                m_hOwnerEntity;                                           // 0x04A8(0x0004)
-	struct DataTable                                   m_Collision;                                              // 0x04C0(0x0000)
+	struct DT_CollisionProperty                        m_Collision;                                              // 0x04C0(0x0000)
 	int                                                m_CollisionGroup;                                         // 0x0540(0x0004)
 	string                                             m_iSignifierName;                                         // 0x0580(0x0000)
 	string                                             m_iName;                                                  // 0x0589(0x0000)
@@ -2602,7 +2949,7 @@ class DT_PropSurvival
 	int                                                m_networkedFlags;                                         // 0x03F0(0x0004)
 	int                                                m_visibilityFlags;                                        // 0x0444(0x0004)
 	struct Vector                                      m_localAngles;                                            // 0x0494(0x000C)
-	struct DataTable                                   m_Collision;                                              // 0x04C0(0x0000)
+	struct DT_CollisionProperty                        m_Collision;                                              // 0x04C0(0x0000)
 	int                                                m_CollisionGroup;                                         // 0x0540(0x0004)
 	string                                             m_iSignifierName;                                         // 0x0580(0x0000)
 	int                                                m_parentAttachmentModel;                                  // 0x0858(0x0004)
@@ -2637,7 +2984,7 @@ class DT_DynamicPropLightweight
 	int                                                m_networkedFlags;                                         // 0x03F0(0x0004)
 	int                                                m_visibilityFlags;                                        // 0x0444(0x0004)
 	struct Vector                                      m_localAngles;                                            // 0x0494(0x000C)
-	struct DataTable                                   m_Collision;                                              // 0x04C0(0x0000)
+	struct DT_CollisionProperty                        m_Collision;                                              // 0x04C0(0x0000)
 	int                                                m_CollisionGroup;                                         // 0x0540(0x0004)
 	int                                                m_parentAttachmentModel;                                  // 0x0858(0x0004)
 	float                                              m_fadeDist;                                               // 0x0864(0x0004)
@@ -2648,15 +2995,15 @@ class DT_DynamicPropLightweight
 //class RecvTable.DT_PostProcessController
 class DT_PostProcessController
 {
-	struct DataTable                                   DT_PostProcessController;                                 // 0x0000(0x0000)
-	struct DataTable                                   m_flPostProcessParameters;                                // 0x0A60(0x0000)
+	struct DT_BaseEntity                               DT_PostProcessController;                                 // 0x0000(0x0000)
+	struct m_flPostProcessParameters                   m_flPostProcessParameters;                                // 0x0A60(0x0000)
 	int                                                m_bMaster;                                                // 0x0A78(0x0001)
 };
 
 //class RecvTable.DT_PointCamera
 class DT_PointCamera
 {
-	struct DataTable                                   DT_PointCamera;                                           // 0x0000(0x0000)
+	struct DT_BaseEntity                               DT_PointCamera;                                           // 0x0000(0x0000)
 	float                                              m_FOV;                                                    // 0x0AC0(0x0004)
 	int                                                m_bFogEnable;                                             // 0x0AE8(0x0001)
 	int                                                m_bActive;                                                // 0x0AE9(0x0001)
@@ -2665,7 +3012,7 @@ class DT_PointCamera
 //class RecvTable.DT_PhysicsProp
 class DT_PhysicsProp
 {
-	struct DataTable                                   DT_PhysicsProp;                                           // 0x0000(0x0000)
+	struct DT_BreakableProp                            DT_PhysicsProp;                                           // 0x0000(0x0000)
 	int                                                m_spawnflags;                                             // 0x0094(0x0004)
 	int                                                m_bAwake;                                                 // 0x1648(0x0001)
 	int                                                m_ignoresCollisionWithCombatCharacters;                   // 0x1649(0x0001)
@@ -2680,7 +3027,7 @@ class DT_PhysicsProp
 //class RecvTable.DT_StatueProp
 class DT_StatueProp
 {
-	struct DataTable                                   DT_StatueProp;                                            // 0x0000(0x0000)
+	struct DT_PhysicsProp                              DT_StatueProp;                                            // 0x0000(0x0000)
 	int                                                m_hInitBaseAnimating;                                     // 0x16A0(0x0004)
 	int                                                m_bShatter;                                               // 0x16A4(0x0001)
 	int                                                m_nShatterFlags;                                          // 0x16A8(0x0004)
@@ -2691,7 +3038,7 @@ class DT_StatueProp
 //class RecvTable.DT_LootRoller
 class DT_LootRoller
 {
-	struct DataTable                                   DT_LootRoller;                                            // 0x0000(0x0000)
+	struct DT_PhysicsProp                              DT_LootRoller;                                            // 0x0000(0x0000)
 	int                                                m_tier;                                                   // 0x16A0(0x0004)
 	int                                                m_hasVaultKey;                                            // 0x16A4(0x0001)
 };
@@ -2719,11 +3066,11 @@ class DT_ParticleSystem
 	int                                                m_killIfOverLimit;                                        // 0x0A77(0x0001)
 	int                                                m_enemyControlPoint;                                      // 0x0A7C(0x0001)
 	int                                                m_enemyControlPointOverride;                              // 0x0A7D(0x0001)
-	struct DataTable                                   m_vServerControlPoints;                                   // 0x0A80(0x0000)
-	struct DataTable                                   m_hControlPointEnts;                                      // 0x0ABC(0x0000)
-	struct DataTable                                   m_controlPointAttachTypes;                                // 0x0AD0(0x0000)
+	struct m_vServerControlPoints                      m_vServerControlPoints;                                   // 0x0A80(0x0000)
+	struct m_hControlPointEnts                         m_hControlPointEnts;                                      // 0x0ABC(0x0000)
+	struct m_controlPointAttachTypes                   m_controlPointAttachTypes;                                // 0x0AD0(0x0000)
 	int                                                m_controlPoint1AttachmentId;                              // 0x0AE5(0x0001)
-	struct DataTable                                   m_vServerControlPointColorIds;                            // 0x0AE9(0x0000)
+	struct m_vServerControlPointColorIds               m_vServerControlPointColorIds;                            // 0x0AE9(0x0000)
 	int                                                m_parentAttachType;                                       // 0x0AF0(0x0004)
 };
 
@@ -2736,10 +3083,10 @@ class DT_BCCLocalPlayerExclusive
 //class RecvTable.DT_BaseCombatCharacter
 class DT_BaseCombatCharacter
 {
-	struct DataTable                                   DT_BaseCombatCharacter;                                   // 0x0000(0x0000)
-	struct DataTable                                   bcc_localdata;                                            // 0x0000(0x0000)
-	struct DataTable                                   m_weaponGettingSwitchedOut;                               // 0x0008(0x0000)
-	struct DataTable                                   m_showActiveWeapon3p;                                     // 0x0010(0x0000)
+	struct DT_BaseAnimatingOverlay                     DT_BaseCombatCharacter;                                   // 0x0000(0x0000)
+	struct DT_BCCLocalPlayerExclusive                  bcc_localdata;                                            // 0x0000(0x0000)
+	struct m_weaponGettingSwitchedOut                  m_weaponGettingSwitchedOut;                               // 0x0008(0x0000)
+	struct m_showActiveWeapon3p                        m_showActiveWeapon3p;                                     // 0x0010(0x0000)
 	float                                              m_vecViewOffset.x;                                        // 0x0034(0x0004)
 	float                                              m_vecViewOffset.y;                                        // 0x0038(0x0004)
 	float                                              m_vecViewOffset.z;                                        // 0x003C(0x0004)
@@ -2751,7 +3098,7 @@ class DT_BaseCombatCharacter
 	struct Time                                        m_cloakFlickerEndTime;                                    // 0x01B0(0x0004)
 	int                                                m_networkedFlags;                                         // 0x03F0(0x0004)
 	struct Vector                                      m_deathVelocity;                                          // 0x0474(0x000C)
-	struct DataTable                                   m_minimapData;                                            // 0x0968(0x0000)
+	struct DT_MinimapBaseEntityData                    m_minimapData;                                            // 0x0968(0x0000)
 	int                                                m_nameVisibilityFlags;                                    // 0x09B8(0x0004)
 	struct Time                                        m_lastFiredTime;                                          // 0x1984(0x0004)
 	int                                                m_lastFiredWeapon;                                        // 0x1988(0x0004)
@@ -2763,10 +3110,10 @@ class DT_BaseCombatCharacter
 	struct Time                                        m_sharedEnergyRegenRate;                                  // 0x19A0(0x0004)
 	float                                              m_sharedEnergyRegenDelay;                                 // 0x19A4(0x0004)
 	struct Time                                        m_lastSharedEnergyTakeTime;                               // 0x19A8(0x0004)
-	struct DataTable                                   m_selectedWeapons;                                        // 0x1A10(0x0000)
-	struct DataTable                                   m_latestPrimaryWeapons;                                   // 0x1A14(0x0000)
-	struct DataTable                                   m_latestPrimaryWeaponsIndexZeroOrOne;                     // 0x1A1C(0x0000)
-	struct DataTable                                   m_latestNonOffhandWeapons;                                // 0x1A24(0x0000)
+	struct m_selectedWeapons                           m_selectedWeapons;                                        // 0x1A10(0x0000)
+	struct m_latestPrimaryWeapons                      m_latestPrimaryWeapons;                                   // 0x1A14(0x0000)
+	struct m_latestPrimaryWeaponsIndexZeroOrOne        m_latestPrimaryWeaponsIndexZeroOrOne;                     // 0x1A1C(0x0000)
+	struct m_latestNonOffhandWeapons                   m_latestNonOffhandWeapons;                                // 0x1A24(0x0000)
 	int                                                m_lastCycleSlot;                                          // 0x1A2C(0x0001)
 	int                                                m_weaponPermission;                                       // 0x1A34(0x0004)
 	struct Time                                        m_weaponDelayEnableTime;                                  // 0x1A38(0x0004)
@@ -2774,7 +3121,7 @@ class DT_BaseCombatCharacter
 	int                                                m_weaponDisabledFlags;                                    // 0x1A52(0x0001)
 	int                                                m_weaponInventorySlotLockedFlags;                         // 0x1A54(0x0002)
 	int                                                m_weaponTypeDisabledFlags;                                // 0x1A58(0x0004)
-	struct DataTable                                   m_weaponTypeDisabledRefCount;                             // 0x1A5C(0x0000)
+	struct m_weaponTypeDisabledRefCount                m_weaponTypeDisabledRefCount;                             // 0x1A5C(0x0000)
 	int                                                m_weaponAmmoRegenDisabled;                                // 0x1A65(0x0001)
 	int                                                m_weaponAmmoRegenDisabledRefCount;                        // 0x1A68(0x0004)
 	int                                                m_hudInfo_visibilityTestAlwaysPasses;                     // 0x1A6C(0x0001)
@@ -2788,28 +3135,28 @@ class DT_BaseCombatCharacter
 //class RecvTable.DT_WeaponInventoryActiveWeaponOnly
 class DT_WeaponInventoryActiveWeaponOnly
 {
-	struct DataTable                                   activeWeapons;                                            // 0x0064(0x0000)
+	struct activeWeapons                               activeWeapons;                                            // 0x0064(0x0000)
 };
 
 //class RecvTable.DT_AI_BaseNPC_StatusEffects
 class DT_AI_BaseNPC_StatusEffects
 {
-	struct DataTable                                   m_statusEffectsTimedNPCNV;                                // 0x1C38(0x0000)
-	struct DataTable                                   m_statusEffectsEndlessNPCNV;                              // 0x1C80(0x0000)
+	struct m_statusEffectsTimedNPCNV                   m_statusEffectsTimedNPCNV;                                // 0x1C38(0x0000)
+	struct m_statusEffectsEndlessNPCNV                 m_statusEffectsEndlessNPCNV;                              // 0x1C80(0x0000)
 };
 
 //class RecvTable.DT_AI_BaseNPC
 class DT_AI_BaseNPC
 {
-	struct DataTable                                   DT_AI_BaseNPC;                                            // 0x0000(0x0000)
-	struct DataTable                                   statuseffectsdata_npc;                                    // 0x0000(0x0000)
+	struct DT_BaseCombatCharacter                      DT_AI_BaseNPC;                                            // 0x0000(0x0000)
+	struct DT_AI_BaseNPC_StatusEffects                 statuseffectsdata_npc;                                    // 0x0000(0x0000)
 	struct Vector                                      m_localOrigin;                                            // 0x0004(0x000C)
 	int                                                m_hGroundEntity;                                          // 0x0438(0x0004)
 	int                                                m_iHealth;                                                // 0x043C(0x0004)
 	struct Vector                                      m_localAngles;                                            // 0x0494(0x000C)
 	int                                                m_iMaxHealth;                                             // 0x0578(0x0004)
 	int                                                m_lifeState;                                              // 0x0798(0x0001)
-	struct DataTable                                   m_inventory;                                              // 0x19B0(0x0000)
+	struct DT_WeaponInventoryActiveWeaponOnly          m_inventory;                                              // 0x19B0(0x0000)
 	int                                                m_fireteamSlotIndex;                                      // 0x1C30(0x0004)
 	int                                                m_aiSprinting;                                            // 0x1D9A(0x0001)
 	int                                                m_aiNetworkFlags;                                         // 0x1DBC(0x0004)
@@ -2822,7 +3169,7 @@ class DT_AI_BaseNPC
 //class RecvTable.DT_NPC_SentryTurret
 class DT_NPC_SentryTurret
 {
-	struct DataTable                                   DT_NPC_SentryTurret;                                      // 0x0000(0x0000)
+	struct DT_AI_BaseNPC                               DT_NPC_SentryTurret;                                      // 0x0000(0x0000)
 	int                                                m_turretState;                                            // 0x1DF0(0x0004)
 	int                                                m_killCount;                                              // 0x1DF4(0x0004)
 	int                                                m_titanKillCount;                                         // 0x1DF8(0x0004)
@@ -2833,9 +3180,9 @@ class DT_NPC_SentryTurret
 //class RecvTable.DT_WeaponInventory
 class DT_WeaponInventory
 {
-	struct DataTable                                   weapons;                                                  // 0x0008(0x0000)
-	struct DataTable                                   offhandWeapons;                                           // 0x0038(0x0000)
-	struct DataTable                                   activeWeapons;                                            // 0x0064(0x0000)
+	struct weapons                                     weapons;                                                  // 0x0008(0x0000)
+	struct offhandWeapons                              offhandWeapons;                                           // 0x0038(0x0000)
+	struct activeWeapons                               activeWeapons;                                            // 0x0064(0x0000)
 };
 
 //class RecvTable.DT_GrappleData
@@ -2866,13 +3213,13 @@ class DT_GrappleData
 //class RecvTable.DT_NPC_Titan
 class DT_NPC_Titan
 {
-	struct DataTable                                   DT_NPC_Titan;                                             // 0x0000(0x0000)
+	struct DT_AI_BaseNPC                               DT_NPC_Titan;                                             // 0x0000(0x0000)
 	int                                                m_decalIndex;                                             // 0x0E60(0x0004)
-	struct DataTable                                   m_inventory;                                              // 0x19B0(0x0000)
-	struct DataTable                                   m_selectedOffhands;                                       // 0x1A26(0x0000)
+	struct DT_WeaponInventory                          m_inventory;                                              // 0x19B0(0x0000)
+	struct m_selectedOffhands                          m_selectedOffhands;                                       // 0x1A26(0x0000)
 	int                                                m_titanSoul;                                              // 0x1AA4(0x0004)
 	int                                                m_grappleHook;                                            // 0x1DF0(0x0004)
-	struct DataTable                                   m_grapple;                                                // 0x1DF8(0x0000)
+	struct DT_GrappleData                              m_grapple;                                                // 0x1DF8(0x0000)
 	int                                                m_grappleActive;                                          // 0x1E88(0x0001)
 	int                                                m_canStand;                                               // 0x1E89(0x0001)
 };
@@ -2880,7 +3227,7 @@ class DT_NPC_Titan
 //class RecvTable.DT_NPC_Dropship
 class DT_NPC_Dropship
 {
-	struct DataTable                                   DT_NPC_Dropship;                                          // 0x0000(0x0000)
+	struct DT_AI_BaseNPC                               DT_NPC_Dropship;                                          // 0x0000(0x0000)
 	int                                                m_titanSoul;                                              // 0x1AA4(0x0004)
 	int                                                m_bJetWakeFXEnabled;                                      // 0x1E10(0x0001)
 };
@@ -2888,7 +3235,7 @@ class DT_NPC_Dropship
 //class RecvTable.DT_NPC_Drone
 class DT_NPC_Drone
 {
-	struct DataTable                                   DT_NPC_Drone;                                             // 0x0000(0x0000)
+	struct DT_AI_BaseNPC                               DT_NPC_Drone;                                             // 0x0000(0x0000)
 	int                                                m_bAttackTarget;                                          // 0x1DF0(0x0001)
 	int                                                m_scanTarget;                                             // 0x1DF4(0x0004)
 	float                                              m_beamSpread;                                             // 0x1DF8(0x0004)
@@ -2897,7 +3244,7 @@ class DT_NPC_Drone
 //class RecvTable.DT_MovieDisplay
 class DT_MovieDisplay
 {
-	struct DataTable                                   DT_MovieDisplay;                                          // 0x0000(0x0000)
+	struct DT_BaseEntity                               DT_MovieDisplay;                                          // 0x0000(0x0000)
 	int                                                m_bEnabled;                                               // 0x0A60(0x0001)
 	int                                                m_bLooping;                                               // 0x0A61(0x0001)
 	string                                             m_szMovieFilename;                                        // 0x0A63(0x0000)
@@ -2924,7 +3271,7 @@ class DT_TEGibEvent
 //class RecvTable.DT_FuncMoveLinear
 class DT_FuncMoveLinear
 {
-	struct DataTable                                   DT_FuncMoveLinear;                                        // 0x0000(0x0000)
+	struct DT_BaseToggle                               DT_FuncMoveLinear;                                        // 0x0000(0x0000)
 	int                                                m_fFlags;                                                 // 0x0098(0x0004)
 	struct Vector                                      m_vecVelocity;                                            // 0x0488(0x000C)
 };
@@ -2942,7 +3289,7 @@ class DT_FuncBrushLightweight
 	int                                                m_networkedFlags;                                         // 0x03F0(0x0004)
 	int                                                m_visibilityFlags;                                        // 0x0444(0x0004)
 	struct Vector                                      m_localAngles;                                            // 0x0494(0x000C)
-	struct DataTable                                   m_Collision;                                              // 0x04C0(0x0000)
+	struct DT_CollisionProperty                        m_Collision;                                              // 0x04C0(0x0000)
 	int                                                m_CollisionGroup;                                         // 0x0540(0x0004)
 	int                                                m_parentAttachmentModel;                                  // 0x0858(0x0004)
 };
@@ -2950,13 +3297,13 @@ class DT_FuncBrushLightweight
 //class RecvTable.DT_FuncBrush
 class DT_FuncBrush
 {
-	struct DataTable                                   DT_FuncBrush;                                             // 0x0000(0x0000)
+	struct DT_BaseEntity                               DT_FuncBrush;                                             // 0x0000(0x0000)
 };
 
 //class RecvTable.DT_BreakableSurface
 class DT_BreakableSurface
 {
-	struct DataTable                                   DT_BreakableSurface;                                      // 0x0000(0x0000)
+	struct DT_BaseEntity                               DT_BreakableSurface;                                      // 0x0000(0x0000)
 	int                                                m_nNumWide;                                               // 0x0A68(0x0004)
 	int                                                m_nNumHigh;                                               // 0x0A6C(0x0004)
 	float                                              m_flPanelWidth;                                           // 0x0A70(0x0004)
@@ -2966,13 +3313,13 @@ class DT_BreakableSurface
 	struct Vector                                      m_vCorner;                                                // 0x0A9C(0x000C)
 	int                                                m_bIsBroken;                                              // 0x0AA8(0x0001)
 	int                                                m_nSurfaceType;                                           // 0x0AAC(0x0004)
-	struct DataTable                                   m_RawPanelBitVec;                                         // 0x0AE8(0x0000)
+	struct m_RawPanelBitVec                            m_RawPanelBitVec;                                         // 0x0AE8(0x0000)
 };
 
 //class RecvTable.DT_CascadeLight
 class DT_CascadeLight
 {
-	struct DataTable                                   DT_CascadeLight;                                          // 0x0000(0x0000)
+	struct DT_BaseEntity                               DT_CascadeLight;                                          // 0x0000(0x0000)
 	struct Vector                                      m_shadowDirection;                                        // 0x0A60(0x000C)
 	struct Vector                                      m_envLightShadowDirection;                                // 0x0A78(0x000C)
 	int                                                m_bEnabled;                                               // 0x0A8C(0x0001)
@@ -2986,7 +3333,7 @@ class DT_CascadeLight
 //class RecvTable.DT_EntityDissolve
 class DT_EntityDissolve
 {
-	struct DataTable                                   DT_EntityDissolve;                                        // 0x0000(0x0000)
+	struct DT_BaseEntity                               DT_EntityDissolve;                                        // 0x0000(0x0000)
 	struct Time                                        m_flStartTime;                                            // 0x0A68(0x0004)
 	float                                              m_flFadeStart;                                            // 0x0A6C(0x0004)
 	float                                              m_flFadeLength;                                           // 0x0A70(0x0004)
@@ -3014,14 +3361,14 @@ class DT_EnvWindShared
 //class RecvTable.DT_EnvWind
 class DT_EnvWind
 {
-	struct DataTable                                   DT_EnvWind;                                               // 0x0000(0x0000)
-	struct DataTable                                   m_EnvWindShared;                                          // 0x0A60(0x0000)
+	struct DT_BaseEntity                               DT_EnvWind;                                               // 0x0000(0x0000)
+	struct DT_EnvWindShared                            m_EnvWindShared;                                          // 0x0A60(0x0000)
 };
 
 //class RecvTable.DT_DynamicLight
 class DT_DynamicLight
 {
-	struct DataTable                                   DT_DynamicLight;                                          // 0x0000(0x0000)
+	struct DT_BaseEntity                               DT_DynamicLight;                                          // 0x0000(0x0000)
 	int                                                m_Flags;                                                  // 0x0A60(0x0001)
 	int                                                m_LightStyle;                                             // 0x0A61(0x0001)
 	float                                              m_Radius;                                                 // 0x0A64(0x0004)
@@ -3034,7 +3381,7 @@ class DT_DynamicLight
 //class RecvTable.DT_ColorCorrection
 class DT_ColorCorrection
 {
-	struct DataTable                                   DT_ColorCorrection;                                       // 0x0000(0x0000)
+	struct DT_BaseEntity                               DT_ColorCorrection;                                       // 0x0000(0x0000)
 	int                                                m_hOwnerEntity;                                           // 0x04A8(0x0004)
 	struct Vector                                      m_localOrigin;                                            // 0x0A60(0x000C)
 	float                                              m_MinFalloff;                                             // 0x0A6C(0x0004)
@@ -3053,14 +3400,14 @@ class DT_ColorCorrection
 //class RecvTable.DT_BaseButton
 class DT_BaseButton
 {
-	struct DataTable                                   DT_BaseButton;                                            // 0x0000(0x0000)
+	struct DT_BaseToggle                               DT_BaseButton;                                            // 0x0000(0x0000)
 	int                                                m_usable;                                                 // 0x0A90(0x0001)
 };
 
 //class RecvTable.DT_AmbientGeneric
 class DT_AmbientGeneric
 {
-	struct DataTable                                   DT_AmbientGeneric;                                        // 0x0000(0x0000)
+	struct DT_BaseEntity                               DT_AmbientGeneric;                                        // 0x0000(0x0000)
 	float                                              m_radius;                                                 // 0x0A60(0x0004)
 	int                                                m_isEnabled;                                              // 0x0A64(0x0001)
 	int                                                m_networkTableSoundID;                                    // 0x0A70(0x0004)
@@ -3071,14 +3418,14 @@ class DT_AmbientGeneric
 //class RecvTable.DT_TitanSoul_StatusEffects
 class DT_TitanSoul_StatusEffects
 {
-	struct DataTable                                   m_statusEffectsTimedTitanSoulNV;                          // 0x0C28(0x0000)
-	struct DataTable                                   m_statusEffectsEndlessTitanSoulNV;                        // 0x0D18(0x0000)
+	struct m_statusEffectsTimedTitanSoulNV             m_statusEffectsTimedTitanSoulNV;                          // 0x0C28(0x0000)
+	struct m_statusEffectsEndlessTitanSoulNV           m_statusEffectsEndlessTitanSoulNV;                        // 0x0D18(0x0000)
 };
 
 //class RecvTable.DT_TitanSoul
 class DT_TitanSoul
 {
-	struct DataTable                                   statuseffectsdata_soul;                                   // 0x0000(0x0000)
+	struct DT_TitanSoul_StatusEffects                  statuseffectsdata_soul;                                   // 0x0000(0x0000)
 	int                                                m_bossPlayer;                                             // 0x0124(0x0004)
 	int                                                m_shieldHealth;                                           // 0x0170(0x0004)
 	int                                                m_shieldHealthMax;                                        // 0x0174(0x0004)
@@ -3103,7 +3450,7 @@ class DT_TitanSoul
 //class RecvTable.DT_VFogVolume
 class DT_VFogVolume
 {
-	struct DataTable                                   DT_VFogVolume;                                            // 0x0000(0x0000)
+	struct DT_BaseEntity                               DT_VFogVolume;                                            // 0x0000(0x0000)
 	struct Vector                                      m_absorption;                                             // 0x0A90(0x000C)
 	struct Vector                                      m_scattering;                                             // 0x0A9C(0x000C)
 	struct Vector                                      m_emission;                                               // 0x0AA8(0x000C)
@@ -3265,9 +3612,9 @@ class DT_CurrentData_LocalPlayer
 	struct Vector                                      m_vecPunchBase_AngleVel;                                  // 0x0034(0x000C)
 	struct Vector                                      m_vecPunchWeapon_Angle;                                   // 0x0040(0x000C)
 	struct Vector                                      m_vecPunchWeapon_AngleVel;                                // 0x004C(0x000C)
-	struct DataTable                                   m_shieldChangeAmountPerSource;                            // 0x0058(0x0000)
-	struct DataTable                                   m_pushedFixedPointOffset;                                 // 0x0060(0x0000)
-	struct DataTable                                   m_pushedFixedPointOffsetReplayCompensated;                // 0x006C(0x0000)
+	struct m_shieldChangeAmountPerSource               m_shieldChangeAmountPerSource;                            // 0x0058(0x0000)
+	struct m_pushedFixedPointOffset                    m_pushedFixedPointOffset;                                 // 0x0060(0x0000)
+	struct m_pushedFixedPointOffsetReplayCompensated   m_pushedFixedPointOffsetReplayCompensated;                // 0x006C(0x0000)
 	struct Rotation                                    m_localGravityRotation;                                   // 0x0084(0x0010)
 };
 
@@ -3329,13 +3676,13 @@ class DT_ThirdPersonView
 //class RecvTable.DT_NearbyPushers
 class DT_NearbyPushers
 {
-	struct DataTable                                   m_nearbyPushers;                                          // 0x4484(0x0000)
+	struct m_nearbyPushers                             m_nearbyPushers;                                          // 0x4484(0x0000)
 };
 
 //class RecvTable.DT_LocalPlayerExclusive
 class DT_LocalPlayerExclusive
 {
-	struct DataTable                                   NearbyPushers;                                            // 0x0000(0x0000)
+	struct DT_NearbyPushers                            NearbyPushers;                                            // 0x0000(0x0000)
 	struct VectorXY                                    m_localOrigin;                                            // 0x0004(0x000C)
 	float                                              m_localOrigin.z;                                          // 0x000C(0x0004)
 	struct Vector                                      m_vecAbsVelocity;                                         // 0x0140(0x000C)
@@ -3344,13 +3691,13 @@ class DT_LocalPlayerExclusive
 	float                                              m_vecVelocity.y;                                          // 0x048C(0x0004)
 	float                                              m_vecVelocity.z;                                          // 0x0490(0x0004)
 	float                                              m_flFriction;                                             // 0x04A0(0x0004)
-	struct DataTable                                   m_tethers;                                                // 0x1BC8(0x0000)
+	struct m_tethers                                   m_tethers;                                                // 0x1BC8(0x0000)
 	struct Cycle                                       m_lastUCmdSimulationTicks;                                // 0x1CB4(0x0004)
 	float                                              m_lastUCmdSimulationRemainderTime;                        // 0x1CB8(0x0004)
-	struct DataTable                                   m_Local;                                                  // 0x1DF0(0x0000)
-	struct DataTable                                   m_currentFrameLocalPlayer;                                // 0x22B0(0x0000)
-	struct DataTable                                   m_modInventory;                                           // 0x25F4(0x0000)
-	struct DataTable                                   m_consumableInventory;                                    // 0x2674(0x0000)
+	struct DT_Local                                    m_Local;                                                  // 0x1DF0(0x0000)
+	struct DT_CurrentData_LocalPlayer                  m_currentFrameLocalPlayer;                                // 0x22B0(0x0000)
+	struct m_modInventory                              m_modInventory;                                           // 0x25F4(0x0000)
+	struct m_consumableInventory                       m_consumableInventory;                                    // 0x2674(0x0000)
 	float                                              m_fStickySprintMinTime;                                   // 0x29B8(0x0004)
 	struct Time                                        m_sprintStartedTime;                                      // 0x29E0(0x0004)
 	float                                              m_sprintStartedFrac;                                      // 0x29E4(0x0004)
@@ -3408,7 +3755,7 @@ class DT_LocalPlayerExclusive
 	int                                                m_ziplineAllowed;                                         // 0x2E74(0x0001)
 	int                                                m_lastZipline;                                            // 0x2E7C(0x0004)
 	struct Time                                        m_lastZiplineDetachTime;                                  // 0x2E80(0x0004)
-	struct DataTable                                   m_zipline;                                                // 0x2E90(0x0000)
+	struct DT_PlayerZipline                            m_zipline;                                                // 0x2E90(0x0000)
 	struct Vector                                      m_ziplineViewOffsetPosition;                              // 0x2F08(0x000C)
 	struct Vector                                      m_ziplineViewOffsetVelocity;                              // 0x2F14(0x000C)
 	int                                                m_ziplineGrenadeEntity;                                   // 0x2F20(0x0004)
@@ -3417,7 +3764,7 @@ class DT_LocalPlayerExclusive
 	int                                                m_highSpeedViewmodelAnims;                                // 0x2F35(0x0001)
 	int                                                m_playAnimationType;                                      // 0x2F38(0x0004)
 	int                                                m_detachGrappleOnPlayAnimationEnd;                        // 0x2F3C(0x0001)
-	struct DataTable                                   m_playAnimationNext;                                      // 0x2F3E(0x0000)
+	struct m_playAnimationNext                         m_playAnimationNext;                                      // 0x2F3E(0x0000)
 	int                                                m_playAnimationEntityBlocker;                             // 0x2F44(0x0004)
 	int                                                m_playAnimationEntityBlockerDucking;                      // 0x2F48(0x0001)
 	int                                                m_boosting;                                               // 0x2F50(0x0001)
@@ -3432,14 +3779,14 @@ class DT_LocalPlayerExclusive
 	float                                              m_glideRechargeDelayAccumulator;                          // 0x2F60(0x0004)
 	int                                                m_hovering;                                               // 0x2F64(0x0001)
 	float                                              m_lastJumpHeight;                                         // 0x2F68(0x0004)
-	struct DataTable                                   m_touchingUpdraftTriggers;                                // 0x2F6C(0x0000)
+	struct m_touchingUpdraftTriggers                   m_touchingUpdraftTriggers;                                // 0x2F6C(0x0000)
 	int                                                m_touchingUpdraftTriggersCount;                           // 0x2FAC(0x0004)
-	struct DataTable                                   m_touchingSlipTriggers;                                   // 0x2FB0(0x0000)
+	struct m_touchingSlipTriggers                      m_touchingSlipTriggers;                                   // 0x2FB0(0x0000)
 	int                                                m_touchingSlipTriggersCount;                              // 0x2FF0(0x0004)
 	struct Vector                                      m_slipAirRestrictDirection;                               // 0x2FF4(0x000C)
 	struct Time                                        m_slipAirRestrictTime;                                    // 0x3000(0x0004)
-	struct DataTable                                   m_replayImportantSounds_networkTableSoundID;              // 0x3140(0x0000)
-	struct DataTable                                   m_replayImportantSounds_beginTime;                        // 0x3150(0x0000)
+	struct m_replayImportantSounds_networkTableSoundID m_replayImportantSounds_networkTableSoundID;              // 0x3140(0x0000)
+	struct m_replayImportantSounds_beginTime           m_replayImportantSounds_beginTime;                        // 0x3150(0x0000)
 	int                                                m_viewConeActive;                                         // 0x318D(0x0001)
 	int                                                m_viewConeParented;                                       // 0x318E(0x0001)
 	int                                                m_viewConeParity;                                         // 0x3190(0x0004)
@@ -3468,7 +3815,7 @@ class DT_LocalPlayerExclusive
 	int                                                m_petTitanMode;                                           // 0x3694(0x0004)
 	int                                                m_hThirdPersonEnt;                                        // 0x369C(0x0004)
 	int                                                m_thirdPersonShoulderView;                                // 0x36A0(0x0001)
-	struct DataTable                                   m_thirdPerson;                                            // 0x3704(0x0000)
+	struct DT_ThirdPersonView                          m_thirdPerson;                                            // 0x3704(0x0000)
 	int                                                m_playerLookTargetEntity;                                 // 0x3814(0x0004)
 	struct Vector                                      m_playerLookTargetOffset;                                 // 0x3818(0x000C)
 	float                                              m_viewConeLerpTime;                                       // 0x3868(0x0004)
@@ -3521,7 +3868,7 @@ class DT_LocalPlayerExclusive
 	struct BitMask                                     m_twitchRewardBits;                                       // 0x47D0(0x0008)
 	int                                                m_twitchDropsInitialized;                                 // 0x47D8(0x0001)
 	struct BitMask                                     m_twitchDropsBits;                                        // 0x47E0(0x0008)
-	struct DataTable                                   m_playerKnockBacks;                                       // 0x47F0(0x0000)
+	struct m_playerKnockBacks                          m_playerKnockBacks;                                       // 0x47F0(0x0000)
 	int                                                m_updraftCount;                                           // 0x4870(0x0004)
 	int                                                m_updraftStage;                                           // 0x4874(0x0004)
 	struct Time                                        m_updraftEnterTime;                                       // 0x4878(0x0004)
@@ -3610,7 +3957,7 @@ class DT_Player_AnimViewEntityData
 	float                                              animViewEntityLerpOutDuration;                            // 0x000C(0x0004)
 	int                                                animViewEntityStabilizePlayerEyeAngles;                   // 0x0010(0x0001)
 	int                                                animViewEntityThirdPersonCameraParity;                    // 0x0014(0x0004)
-	struct DataTable                                   animViewEntityThirdPersonCameraAttachment;                // 0x0018(0x0000)
+	struct animViewEntityThirdPersonCameraAttachment   animViewEntityThirdPersonCameraAttachment;                // 0x0018(0x0000)
 	int                                                animViewEntityNumThirdPersonCameraAttachments;            // 0x0020(0x0004)
 	int                                                animViewEntityThirdPersonCameraVisibilityChecks;          // 0x0024(0x0001)
 	int                                                animViewEntityDrawPlayer;                                 // 0x0025(0x0001)
@@ -3628,7 +3975,7 @@ class DT_CurrentData_Player
 	float                                              m_traversalAnimProgress;                                  // 0x0024(0x0004)
 	float                                              m_sprintTiltFrac;                                         // 0x0028(0x0004)
 	float                                              m_ziprailBankTiltFrac;                                    // 0x002C(0x0004)
-	struct DataTable                                   m_ammoPoolCount;                                          // 0x0030(0x0000)
+	struct m_ammoPoolCount                             m_ammoPoolCount;                                          // 0x0030(0x0000)
 };
 
 //class RecvTable.DT_PlayerShared
@@ -3640,12 +3987,12 @@ class DT_PlayerShared
 //class RecvTable.DT_Player
 class DT_Player
 {
-	struct DataTable                                   DT_Player;                                                // 0x0000(0x0000)
-	struct DataTable                                   localdata;                                                // 0x0000(0x0000)
-	struct DataTable                                   teamshareddata;                                           // 0x0000(0x0000)
-	struct DataTable                                   portalnonlocaldata;                                       // 0x0000(0x0000)
+	struct DT_BaseCombatCharacter                      DT_Player;                                                // 0x0000(0x0000)
+	struct DT_LocalPlayerExclusive                     localdata;                                                // 0x0000(0x0000)
+	struct DT_PlayerTeamShared                         teamshareddata;                                           // 0x0000(0x0000)
+	struct DT_PortalNonLocalPlayerExclusive            portalnonlocaldata;                                       // 0x0000(0x0000)
 	struct Array                                       m_passives;                                               // 0x0000(0x0010)
-	struct DataTable                                   connectionQualityIndex;                                   // 0x0000(0x0000)
+	struct DT_ConnectionQualityIndex                   connectionQualityIndex;                                   // 0x0000(0x0000)
 	struct Vector                                      m_vecAbsOrigin;                                           // 0x0004(0x000C)
 	int                                                isLocalOriginLocal;                                       // 0x0010(0x0001)
 	int                                                m_fFlags;                                                 // 0x0098(0x0004)
@@ -3656,18 +4003,18 @@ class DT_Player
 	int                                                m_iMaxHealth;                                             // 0x0578(0x0004)
 	int                                                m_lifeState;                                              // 0x0798(0x0001)
 	int                                                m_decalIndex;                                             // 0x0E60(0x0004)
-	struct DataTable                                   m_overlayEventParity;                                     // 0x1751(0x0000)
-	struct DataTable                                   m_inventory;                                              // 0x19B0(0x0000)
-	struct DataTable                                   m_selectedOffhands;                                       // 0x1A26(0x0000)
-	struct DataTable                                   m_selectedOffhandsPendingHybridAction;                    // 0x1A29(0x0000)
+	struct m_overlayEventParity                        m_overlayEventParity;                                     // 0x1751(0x0000)
+	struct DT_WeaponInventory                          m_inventory;                                              // 0x19B0(0x0000)
+	struct m_selectedOffhands                          m_selectedOffhands;                                       // 0x1A26(0x0000)
+	struct m_selectedOffhandsPendingHybridAction       m_selectedOffhandsPendingHybridAction;                    // 0x1A29(0x0000)
 	int                                                m_titanSoul;                                              // 0x1AA4(0x0004)
 	int                                                m_bZooming;                                               // 0x1C31(0x0001)
 	struct Time                                        m_zoomToggleOnStartTime;                                  // 0x1C34(0x0004)
 	float                                              m_zoomBaseFrac;                                           // 0x1C38(0x0004)
 	struct Time                                        m_zoomBaseTime;                                           // 0x1C3C(0x0004)
 	struct Time                                        m_zoomFullStartTime;                                      // 0x1C40(0x0004)
-	struct DataTable                                   m_currentFramePlayer;                                     // 0x20D8(0x0000)
-	struct DataTable                                   pl;                                                       // 0x2500(0x0000)
+	struct DT_CurrentData_Player                       m_currentFramePlayer;                                     // 0x20D8(0x0000)
+	struct DT_PlayerState                              pl;                                                       // 0x2500(0x0000)
 	int                                                m_ammoPoolCapacity;                                       // 0x2584(0x0004)
 	int                                                m_hasBadReputation;                                       // 0x2588(0x0001)
 	int                                                m_hardware;                                               // 0x2590(0x0001)
@@ -3682,16 +4029,16 @@ class DT_Player
 	struct BitMask                                     m_classModsActive;                                        // 0x25C0(0x0008)
 	int                                                m_bleedoutState;                                          // 0x2718(0x0004)
 	float                                              m_bleedoutStartTime;                                      // 0x271C(0x0004)
-	struct DataTable                                   m_statusEffectsTimedPlayerNV;                             // 0x2720(0x0000)
-	struct DataTable                                   m_statusEffectsEndlessPlayerNV;                           // 0x2810(0x0000)
+	struct m_statusEffectsTimedPlayerNV                m_statusEffectsTimedPlayerNV;                             // 0x2720(0x0000)
+	struct m_statusEffectsEndlessPlayerNV              m_statusEffectsEndlessPlayerNV;                           // 0x2810(0x0000)
 	struct Time                                        m_damageComboLatestUpdateTime;                            // 0x28C4(0x0004)
 	int                                                m_damageComboStartHealth;                                 // 0x28C8(0x0004)
-	struct DataTable                                   m_gestureSequences;                                       // 0x28CC(0x0000)
-	struct DataTable                                   m_gestureStartTimes;                                      // 0x28DC(0x0000)
-	struct DataTable                                   m_gestureBlendInDuration;                                 // 0x28FC(0x0000)
-	struct DataTable                                   m_gestureBlendOutDuration;                                // 0x291C(0x0000)
-	struct DataTable                                   m_gestureFadeOutStartTime;                                // 0x293C(0x0000)
-	struct DataTable                                   m_gestureFadeOutDuration;                                 // 0x295C(0x0000)
+	struct m_gestureSequences                          m_gestureSequences;                                       // 0x28CC(0x0000)
+	struct m_gestureStartTimes                         m_gestureStartTimes;                                      // 0x28DC(0x0000)
+	struct m_gestureBlendInDuration                    m_gestureBlendInDuration;                                 // 0x28FC(0x0000)
+	struct m_gestureBlendOutDuration                   m_gestureBlendOutDuration;                                // 0x291C(0x0000)
+	struct m_gestureFadeOutStartTime                   m_gestureFadeOutStartTime;                                // 0x293C(0x0000)
+	struct m_gestureFadeOutDuration                    m_gestureFadeOutDuration;                                 // 0x295C(0x0000)
 	int                                                m_gestureAutoKillBitfield;                                // 0x297C(0x0004)
 	int                                                m_autoSprintForced;                                       // 0x29C0(0x0004)
 	int                                                m_fIsSprinting;                                           // 0x29C4(0x0001)
@@ -3700,7 +4047,7 @@ class DT_Player
 	struct Time                                        m_stickySprintForwardEnableTime;                          // 0x29D8(0x0004)
 	struct Time                                        m_stickySprintForwardDisableTime;                         // 0x29DC(0x0004)
 	struct Time                                        m_damageImpulseNoDecelEndTime;                            // 0x29F4(0x0004)
-	struct DataTable                                   m_playerVehicles;                                         // 0x2A00(0x0000)
+	struct m_playerVehicles                            m_playerVehicles;                                         // 0x2A00(0x0000)
 	int                                                m_playerVehicleCount;                                     // 0x2A08(0x0004)
 	int                                                m_playerVehicleDriven;                                    // 0x2A0C(0x0004)
 	struct Time                                        m_playerVehicleUseTime;                                   // 0x2A10(0x0004)
@@ -3721,12 +4068,12 @@ class DT_Player
 	int                                                m_traversalYawPoseParameter;                              // 0x2B48(0x0002)
 	int                                                m_wallClimbSetUp;                                         // 0x2B60(0x0001)
 	int                                                m_wallHanging;                                            // 0x2B61(0x0001)
-	struct DataTable                                   m_grapple;                                                // 0x2C60(0x0000)
+	struct DT_GrappleData                              m_grapple;                                                // 0x2C60(0x0000)
 	int                                                m_grappleActive;                                          // 0x2CF0(0x0001)
 	int                                                m_turret;                                                 // 0x2D34(0x0004)
-	struct DataTable                                   m_hViewModels;                                            // 0x2D38(0x0000)
-	struct DataTable                                   m_viewOffsetEntity;                                       // 0x2D48(0x0000)
-	struct DataTable                                   m_animViewEntity;                                         // 0x2D88(0x0000)
+	struct m_hViewModels                               m_hViewModels;                                            // 0x2D38(0x0000)
+	struct DT_Player_ViewOffsetEntityData              m_viewOffsetEntity;                                       // 0x2D48(0x0000)
+	struct DT_Player_AnimViewEntityData                m_animViewEntity;                                         // 0x2D88(0x0000)
 	int                                                m_activeZipline;                                          // 0x2E78(0x0004)
 	int                                                m_ziplineValid3pWeaponLayerAnim;                          // 0x2E84(0x0001)
 	int                                                m_ziplineState;                                           // 0x2E88(0x0004)
@@ -3735,7 +4082,7 @@ class DT_Player
 	int                                                m_isPerformingBoostAction;                                // 0x2F65(0x0001)
 	int                                                m_lastJumpPadTouched;                                     // 0x3060(0x0004)
 	int                                                m_launchCount;                                            // 0x3068(0x0004)
-	struct DataTable                                   m_melee;                                                  // 0x3198(0x0000)
+	struct DT_PlayerMelee_PlayerData                   m_melee;                                                  // 0x3198(0x0000)
 	int                                                m_useCredit;                                              // 0x31D0(0x0001)
 	int                                                m_playerFlags;                                            // 0x31E0(0x0004)
 	int                                                m_hasMic;                                                 // 0x31E8(0x0001)
@@ -3755,7 +4102,7 @@ class DT_Player
 	int                                                m_ubEFNoInterpParity;                                     // 0x3FC8(0x0001)
 	int                                                m_hColorCorrectionCtrl;                                   // 0x3FCC(0x0004)
 	string                                             m_title;                                                  // 0x3FF0(0x0000)
-	struct DataTable                                   m_Shared;                                                 // 0x4320(0x0000)
+	struct DT_PlayerShared                             m_Shared;                                                 // 0x4320(0x0000)
 	int                                                m_pilotClassIndex;                                        // 0x4374(0x0004)
 	int                                                m_pilotClassActivityModifier;                             // 0x4378(0x0002)
 	int                                                m_playerScriptNetDataGlobal;                              // 0x4600(0x0004)
@@ -3804,7 +4151,7 @@ class DT_BoneFollower
 	int                                                m_networkedFlags;                                         // 0x03F0(0x0004)
 	struct Vector                                      m_localAngles;                                            // 0x0494(0x000C)
 	int                                                m_hOwnerEntity;                                           // 0x04A8(0x0004)
-	struct DataTable                                   m_Collision;                                              // 0x04C0(0x0000)
+	struct DT_CollisionProperty                        m_Collision;                                              // 0x04C0(0x0000)
 	int                                                m_CollisionGroup;                                         // 0x0540(0x0004)
 	int                                                m_modelIndex;                                             // 0x0A60(0x0004)
 	int                                                m_boneIndex;                                              // 0x0A64(0x0002)
